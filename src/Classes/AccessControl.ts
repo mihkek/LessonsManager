@@ -6,7 +6,7 @@ export class AccessControl
     static modeTeacher : number = 2
     //Базовая функция, проверяет авторизацию, если нет - перенаправление на страницу
     //Если да - проверяем режим работы
-    startCheck(req:any, res:any) {
+    static startCheck(req:any, res:any) {
         console.log("i am here)")
         if((req.cookies.isLogin == undefined ) ||(req.cookies.isLogin == false))
         {
@@ -16,14 +16,13 @@ export class AccessControl
         else
         {
             console.log("login was set")
-            console.log("")
             if(req.cookies.mode == AccessControl.modePupil)
-                 res.redirect("pupilPage")
+                 res.redirect("/pupil/index")
             if(req.cookies.mode == AccessControl.modeTeacher)
-                 res.redirect("teacherPage")
+                 res.redirect("/teacher/index")
         }
     }
-    modeCheck(req:any,mode : Number): boolean{
+    static modeCheck(req:any,mode : Number): boolean{
         if(!req.cookies.isLogin)
             return false
         if(req.cookies.mode != mode)

@@ -1,19 +1,7 @@
 import { Body, Controller, Get, HttpStatus, ParseIntPipe, Post, Redirect, Render, Req, Res } from '@nestjs/common';
-import { Console } from 'console';
-import { request, response } from 'express';
 import { AppService } from './app.service';
-
-import { applyDecorators } from '@nestjs/common';
-import { check } from 'prettier';
-import { Int } from '@nestjs/graphql';
 import {AccessControl} from './Classes/AccessControl'
-
 import {User} from './Models/User'
-import { AssertionError } from 'assert/strict';
-
-
-var accessControl = new AccessControl()
-
 
 @Controller()
 export class AppController {
@@ -22,18 +10,18 @@ export class AppController {
 
   @Get()
   init(@Req() req, @Res() res)  {
-    accessControl.startCheck(req,res)
+    AccessControl.startCheck(req,res)
   }
   @Get("login")
   @Render("login")
   login(@Req() req, @Res() res):any{
-    if(accessControl.modeCheck(req, AccessControl.modeTeacher))
+    if(AccessControl.modeCheck(req, AccessControl.modeTeacher))
     { 
-        res.redirect("teacherPage")
+        res.redirect("/teacher/index")
     }
-    if(accessControl.modeCheck(req, AccessControl.modePupil))
+    if(AccessControl.modeCheck(req, AccessControl.modePupil))
     { 
-        res.redirect("pupilPage")
+        res.redirect("/pupil/index")
     }
     return
     {
@@ -45,19 +33,11 @@ export class AppController {
   @Render("pupil")
   pupilPage(@Req() req, @Res() res)
   {
-     if(!accessControl.modeCheck(req, AccessControl.modePupil))
+     if(!AccessControl.modeCheck(req, AccessControl.modePupil))
          res.redirect("login")
      return;
   }
-  @Get("teacherPage")
-  @Render("teacher")
-  teacherPage(@Req() req, @Res() res)
-  {
-    if(!accessControl.modeCheck(req, AccessControl.modeTeacher))
-        res.redirect("login")
-    console.log(req.cookies)
-    return;
-  }
+  
   @Post("singIn")
   async singIn(@Res() res,
     @Body() body: { login: string; password: string; mode:number },
@@ -76,12 +56,12 @@ export class AppController {
        if(body.mode == AccessControl.modePupil)
        {
           console.log("pupil mode")
-          res.redirect("pupilPage")
+          res.redirect("/pupil/pupilPage")
        }
        if(body.mode == AccessControl.modeTeacher)
        {
           console.log("teacher mode")
-          res.redirect("teacherPage")
+          res.redirect("/teacher/index")
        }
      }
   }
