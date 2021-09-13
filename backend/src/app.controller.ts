@@ -24,11 +24,17 @@ export class AppController {
         res.redirect("/pupil/index")
     }
     return
-    {
+    { 
       isFall : false
     }
   }
-
+  @Get("testReact")
+  testReact(@Req() req, @Res() res)
+  {
+      res.json({
+        message: "Fuck! I received this shit from an another application!!!"
+      })
+  } 
   @Get("pupilPage")
   @Render("pupil")
   pupilPage(@Req() req, @Res() res)
@@ -37,15 +43,21 @@ export class AppController {
          res.redirect("login")
      return;
   }
-  
+    
   @Post("singIn")
-  async singIn(@Res() res,
+  async singIn(@Res() res,@Req() Req,
     @Body() body: { login: string; password: string; mode:number },
   ){
      var user = await User.findOne({'login' : body.login, 'password' : body.password,'mode' : body.mode })
+     console.log(Req)
+     console.log(body)
      if(user == undefined){
-       console.log("not found")
-        res.render("login", { isFall : true})
+        console.log("not found")
+        //res.render("login", { isFall : true})
+        res.json(
+          {
+            logied: false
+          })
      }
      else
      {
@@ -56,13 +68,33 @@ export class AppController {
        if(body.mode == AccessControl.modePupil)
        {
           console.log("pupil mode")
-          res.redirect("/pupil/pupilPage")
+          //res.redirect("/pupil/pupilPage")
+          res.json(
+            {
+              logied: true,
+              mode: body.mode,
+            }
+          )
        }
-       if(body.mode == AccessControl.modeTeacher)
+       else if(body.mode == AccessControl.modeTeacher)
        {
           console.log("teacher mode")
-          res.redirect("/teacher/index")
+          res.json(
+            {
+              logied: true,
+              mode: body.mode,
+            })
+          //res.redirect("/teacher/index")
        }
+       else
+       {
+          res.json(
+            {
+              logied: false
+            }
+          )
+       }
+       
      }
   }
   @Get("logout")

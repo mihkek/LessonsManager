@@ -10,6 +10,6 @@ async function bootstrap() {
   app.setBaseViewsDir(join(__dirname, '../views'));
   app.useStaticAssets(join(__dirname, '..', 'static'));
   app.setViewEngine('pug');
-  await app.listen(3000);
+  await app.listen(3001);
 }
 bootstrap();
