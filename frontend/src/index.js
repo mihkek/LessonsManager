@@ -5,16 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import {createBrowserHistory} from 'history'
-
+import { BrowserRouter } from 'react-router-dom';
 // создаём кастомную историю
 const history = createBrowserHistory()
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App test = "Testing props"/>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+
+ReactDOM.render((
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+), document.getElementById('root'))
 
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,49 +1,58 @@
 import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import {
+  Redirect,
+} from "react-router-dom"
 
 export class LoginForm extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {login: '', password: ''};
+      this.state = {login: '', 
+        password: '',
+        mode: '1', 
+        logied: false,
+        message: '',
+        submit: false
+      };
+      console.log(props.logied)
       this.handleInputChange = this.handleInputChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
-  
     handleInputChange(event) {
         const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const value =  target.value;
         const name = target.name;
         this.setState({
           [name]: value    });
-      }
-
-
+    }
     handleSubmit(event) {
-      
-        const apiUrl = "singIn";
-        fetch(apiUrl,{
-            method: 'POST',
-            FUCK: "dick",
-            body:{
-                FUCK: "dick"
-            }, 
-            params: {
-                FUCK: "dick"
-            }
-            //body: "login="+this.state.login+"&password="+this.state.password+"&mode=1"
-        })
-          .then((response) => response.json())
-          .then((data) => console.log('This is your data', data));
-        // useEffect(() => {
-        //     fetch("singIn?login="+this.state.login+"&password="+this.state.password+"&mode=1", {
-        //         method: 'POST',
-        //     })
-        //     .then(response => response.json())
-        //     .then(response => setData(response.logied   ))
-        // }, [])
-        // if(!data)
-        //     alert("Fuck(")
-        // else
-        //     alert('Result: ' + data );
+          this.setState({
+            submit: true    
+          });
+            axios({
+                method: 'post', // THERE GOES THE METHOD
+                url: 'singIn', // THERE GOES THE URL
+                headers: {},
+                data: {
+                    "login" : this.state.login,
+                    "password" : this.state.password,
+                    "mode" : this.state.mode
+                }
+            })
+              .then(response => {
+                this.setState({
+                    logied: response.data.logied,
+                    message: response.data.message
+                  });
+                  this.props.updateLogied(this.state.logied)
+                  console.log("logied updated")
+              })
+              .catch(() => {
+                this.setState({
+                  logied: false,
+                  message: "Server error"
+                });
+              })
        event.preventDefault();
     }
   
@@ -51,6 +60,10 @@ export class LoginForm extends React.Component {
       return (
         <form onSubmit={this.handleSubmit}>       
          <div>
+           <div>
+                 { this.state.submit && !this.state.logied && <h1>Error: {this.state.message}</h1>}
+                 { this.state.logied && <Redirect to='/'/>}
+             </div>
                      <div>
                          <label htmlFor='login'>Login</label>
                          <input type="text" name="login" value={this.state.login} onChange={this.handleInputChange} />   
@@ -59,6 +72,13 @@ export class LoginForm extends React.Component {
                          <label htmlFor='login'>Password</label>
                          <input type="password" name="password" value={this.state.password} onChange={this.handleInputChange} />
                      </div>
+                     <div>
+                       <label >Mode</label>
+                        <select value={this.state.mode} onChange={this.handleInputChange}>            
+                            <option value="1">Pupil</option>
+                            <option value="2">Teacher</option>
+                        </select>
+                       </div>
                    <input type="submit" value="Sing in" /> 
         </div>
         </form>

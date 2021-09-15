@@ -49,13 +49,14 @@ export class AppController {
     @Body() body: { login: string; password: string; mode:number },
   ){
      var user = await User.findOne({'login' : body.login, 'password' : body.password,'mode' : body.mode })
-     console.log(Req)
+     console.log("Body:")
      console.log(body)
      if(user == undefined){
         console.log("not found")
         //res.render("login", { isFall : true})
         res.json(
           {
+            message: "User with this login does not exist",
             logied: false
           })
      }
@@ -72,7 +73,6 @@ export class AppController {
           res.json(
             {
               logied: true,
-              mode: body.mode,
             }
           )
        }
@@ -81,8 +81,7 @@ export class AppController {
           console.log("teacher mode")
           res.json(
             {
-              logied: true,
-              mode: body.mode,
+              logied: true
             })
           //res.redirect("/teacher/index")
        }
@@ -90,6 +89,7 @@ export class AppController {
        {
           res.json(
             {
+              message: "Your passwort is not correct. Try again",
               logied: false
             }
           )
