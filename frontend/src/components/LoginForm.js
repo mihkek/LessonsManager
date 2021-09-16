@@ -45,7 +45,6 @@ export class LoginForm extends React.Component {
                     message: response.data.message
                   });
                   this.props.updateLogied(this.state.logied)
-                  console.log("logied updated")
               })
               .catch(() => {
                 this.setState({
