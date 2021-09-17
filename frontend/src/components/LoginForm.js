@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import axios from 'axios';
+import InputField, { SelectField, SimpleForm } from './base_components/InputField';
 import {
   Redirect,
 } from "react-router-dom"
@@ -7,15 +8,23 @@ import {
 export class LoginForm extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {login: '', 
+      this.handleInputChange = this.handleInputChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
+      this.initState = this.initState.bind(this);
+      this.initState(this.getState())
+    }
+    getState(){
+      return {
+        login: '', 
         password: '',
-        mode: 1, 
+        mode: '2', 
         logied: false,
         message: '',
         submit: false
-      };
-      this.handleInputChange = this.handleInputChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
+      }
+    }
+    initState(data){
+      this.state = data
     }
     handleInputChange(event) {
         const target = event.target;
@@ -44,6 +53,7 @@ export class LoginForm extends React.Component {
                     logied: response.data.logied,
                     message: response.data.message
                   });
+                  const funcName = "updateLogied"
                   this.props.updateLogied(response.data.logied,response.data.mode)
               })
               .catch(() => {
@@ -57,31 +67,34 @@ export class LoginForm extends React.Component {
     }
   
     render() {
+      const options = [
+        {
+          value: 1,
+          text: "Pupil"
+        },
+        {
+          value: 2,
+          text: "Teacher"
+        },
+      ]
+      const fields = [
+        {
+           data: <InputField label="Login" name="login" type="text" value={this.state.login} onChange={this.handleInputChange} />
+        }, 
+        {
+          data: <InputField label="Password" name="password" type="password" value={this.state.password} onChange={this.handleInputChange} />
+        },
+        {
+          data:  <SelectField label="Mode" name="mode" value={this.state.mode} onChange={this.handleInputChange} options={options} />
+        }
+      ]
       return (
-        <form onSubmit={this.handleSubmit}>       
-         <div>
-           <div>
-                 { this.state.submit && !this.state.logied && <h1>Error: {this.state.message}</h1>}
-                 { this.state.logied && <Redirect to='/'/>}
-             </div>
-                     <div>
-                         <label htmlFor='login'>Login</label>
-                         <input type="text" name="login" value={this.state.login} onChange={this.handleInputChange} />   
-                     </div>    
-                     <div>
-                         <label htmlFor='login'>Password</label>
-                         <input type="password" name="password" value={this.state.password} onChange={this.handleInputChange} />
-                     </div>
-                     <div>
-                       <label >Mode</label>
-                        <select name="mode" value={this.state.mode} onChange={this.handleInputChange}>            
-                            <option value="1">Pupil</option>
-                            <option value="2">Teacher</option>
-                        </select>
-                       </div>
-                   <input type="submit" value="Sing in" /> 
+        <div>
+            { this.state.submit && !this.state.logied && <h1>Error: {this.state.message}</h1>}
+            { this.state.logied && <Redirect to='/'/>}
+            <SimpleForm fields={fields} onSubmit={this.handleSubmit} buttonText="Sing in"/>
         </div>
-        </form>
+        
       );
     }
   }
