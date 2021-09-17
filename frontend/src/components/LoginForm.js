@@ -9,12 +9,11 @@ export class LoginForm extends React.Component {
       super(props);
       this.state = {login: '', 
         password: '',
-        mode: '1', 
+        mode: 1, 
         logied: false,
         message: '',
         submit: false
       };
-      console.log(props.logied)
       this.handleInputChange = this.handleInputChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -23,7 +22,8 @@ export class LoginForm extends React.Component {
         const value =  target.value;
         const name = target.name;
         this.setState({
-          [name]: value    });
+          [name]: value  
+          });
     }
     handleSubmit(event) {
           this.setState({
@@ -44,12 +44,13 @@ export class LoginForm extends React.Component {
                     logied: response.data.logied,
                     message: response.data.message
                   });
-                  this.props.updateLogied(this.state.logied)
+                  this.props.updateLogied(response.data.logied,response.data.mode)
               })
               .catch(() => {
+                const propName = "message"
                 this.setState({
                   logied: false,
-                  message: "Server error"
+                  [propName]: "Server error"
                 });
               })
        event.preventDefault();
@@ -73,7 +74,7 @@ export class LoginForm extends React.Component {
                      </div>
                      <div>
                        <label >Mode</label>
-                        <select value={this.state.mode} onChange={this.handleInputChange}>            
+                        <select name="mode" value={this.state.mode} onChange={this.handleInputChange}>            
                             <option value="1">Pupil</option>
                             <option value="2">Teacher</option>
                         </select>

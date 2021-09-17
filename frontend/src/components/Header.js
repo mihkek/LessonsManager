@@ -1,16 +1,13 @@
 
 import { Link } from 'react-router-dom'
 import React from 'react';
+import * as Constants from '../constants/AppConstants'
 
  export class Header extends React.Component
  {
     constructor(props) {
         console.log(props.logied)
         super(props);
-        //this.updateLogied = this.updateLogied.bind(this);
-        this.state = {
-          mode: '',
-        };
     }
     staticMenu(){
         return (
@@ -28,16 +25,24 @@ import React from 'react';
             <li><Link to='/Logout'>Logout</Link></li>
           )
     }
-    // updateLogied (e){
-    //     console.log("Logout - " + e.target.isLog)
-    //     this.props.updateLogied(e.target.isLog);
-    // }
+    teacherMenu(){
+        return (
+            <li><Link to='/Teacher'>Teacher</Link></li>
+          )
+    }
 
+    pupilMenu(){
+        return (
+            <li><Link to='/Pupil'>Pupil</Link></li>
+          )
+    }
         render() {
            return(
             <header>
                 <nav>
                     <ul>
+                    {this.props.logied && this.props.mode == Constants.ModeTeacher && this.teacherMenu() }
+                    {this.props.logied && this.props.mode == Constants.ModePupil && this.pupilMenu() }
                     {this.staticMenu()}
                     {this.props.logied ? this.logiedMenu(): this.notLoginMenu() }
                     </ul>

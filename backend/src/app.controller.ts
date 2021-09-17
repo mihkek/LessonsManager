@@ -73,6 +73,7 @@ export class AppController {
           res.json(
             {
               logied: true,
+              mode: 2
             }
           )
        }
@@ -81,7 +82,8 @@ export class AppController {
           console.log("teacher mode")
           res.json(
             {
-              logied: true
+              logied: true,
+              mode: 1
             })
           //res.redirect("/teacher/index")
        }
