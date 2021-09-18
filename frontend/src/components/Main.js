@@ -1,8 +1,8 @@
 import { LoginForm } from './LoginForm'
 import {Header} from './Header'
 import React from 'react';
-import TeacherPage from './TeacherPage';
-import PupilPage from './PupilPage';
+import TeacherPage from './pages/teacher/TeacherPage';
+import PupilPage from './pages/pupil/PupilPage';
 
 import {
     Route,

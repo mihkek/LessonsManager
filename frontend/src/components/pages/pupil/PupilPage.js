@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Constants from '../constants/AppConstants'
+import * as Constants from '../../../constants/AppConstants'
 
 export default class PupilPage extends React.Component {
     constructor(props){

@@ -12,7 +12,8 @@ export default class InputField extends React.Component{
         return(
             <div>
                 <label htmlFor={this.props.name}>{this.props.label}</label>
-                <input type={this.props.type} name={this.props.name} value={this.props.login} onChange={this.props.onChange} />   
+                <input className="bg-white tracking-wide rounded-md mt-1 px-4 py-2 border focus:border-brand focus:shadow-outline-sm focus:outline-none"
+                type={this.props.type} name={this.props.name} value={this.props.login} onChange={this.props.onChange} />   
             </div>  
         )
     }
