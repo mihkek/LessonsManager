@@ -1,39 +1,39 @@
 
 import { Link } from 'react-router-dom'
 import React from 'react';
-import * as Constants from '../constants/AppConstants'
+import * as AppConstants from '../constants/AppConstants'
+import * as Routs from '../constants/Routs'
 
  export class Header extends React.Component
  {
     constructor(props) {
-        console.log(props.logied)
         super(props);
     }
     staticMenu(){
         return (
-            [<li><Link to='/'>Home</Link></li>,
-            <li><Link to='/About'>About</Link></li>]
+            [<li><Link to={Routs.HOME.link}>{Routs.HOME.name}</Link></li>,
+            <li><Link to={Routs.ABOUT.link}>{Routs.ABOUT.name}</Link></li>]
         )
     }
     notLoginMenu(){
         return (
-            <li><Link to='/Sing in'>Sing in</Link></li>
+            <li><Link to={Routs.LOGIN.link}>{Routs.LOGIN.name}</Link></li>
           )
     }
     logiedMenu(){
         return (
-            <li><Link to='/Logout'>Logout</Link></li>
+            <li><Link to={Routs.LOGOUT.link}>{Routs.LOGOUT.name}</Link></li>
           )
     }
     teacherMenu(){
         return (
-            <li><Link to='/Teacher'>Teacher</Link></li>
+            <li><Link to={Routs.TEACHER.link}>{Routs.TEACHER.name}</Link></li>
           )
     }
 
     pupilMenu(){
         return (
-            <li><Link to='/Pupil'>Pupil</Link></li>
+            <li><Link to={Routs.PUPIL.link}>{Routs.PUPIL.name}</Link></li>
           )
     }
         render() {
@@ -41,8 +41,8 @@ import * as Constants from '../constants/AppConstants'
             <header>
                 <nav>
                     <ul>
-                    {this.props.logied && this.props.mode == Constants.ModeTeacher && this.teacherMenu() }
-                    {this.props.logied && this.props.mode == Constants.ModePupil && this.pupilMenu() }
+                    {this.props.logied && this.props.mode == AppConstants.ModeTeacher && this.teacherMenu() }
+                    {this.props.logied && this.props.mode == AppConstants.ModePupil && this.pupilMenu() }
                     {this.staticMenu()}
                     {this.props.logied ? this.logiedMenu(): this.notLoginMenu() }
                     </ul>

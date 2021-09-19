@@ -1,8 +1,11 @@
-import { LoginForm } from './LoginForm'
+import { LoginForm } from './pages/LoginForm'
 import {Header} from './Header'
 import React from 'react';
-import TeacherPage from './TeacherPage';
-import PupilPage from './PupilPage';
+import TeacherPage from './pages/TeacherPage';
+import PupilPage from './pages/PupilPage';
+import * as Links from '../constants/Routs'
+import { AppNavBar } from './library/additional/Nav-bar'
+import * as MenuConst from '../constants/Menu'
 
 import {
     Route,
@@ -41,7 +44,7 @@ export class Main extends React.Component
         localStorage.setItem('mode', this.state.mode)
         console.log(" Storage logout - " + isLog)  
         return (
-            <Redirect to='/'/>
+            <Redirect to={Links.HOME.link}/>
         )
     }
     logout = () => {
@@ -51,7 +54,7 @@ export class Main extends React.Component
          })
         localStorage.setItem('logied', false)
         return (
-            <Redirect to='/'/>
+            <Redirect to={Links.HOME.link}/>
         )
     }
     render(){
@@ -59,21 +62,24 @@ export class Main extends React.Component
             <main>
             <Switch>
                 <Route
-                    path="/Pupil"
+                    path="/pupil"
                     render={props => <PupilPage  mode={this.state.mode } logied={this.state.logied } {...props} />}
                 />
                  <Route
-                    path="/Teacher"
+                    path="/leacher"
                     render={props => <TeacherPage  mode={this.state.mode } logied={this.state.logied } {...props} />}
                 />
-                <Route path='/Logout' render={ this.logout} />
+                <Route path='/logout' render={ this.logout} />
                 <Route
-                    path="/Sing in"
+                    path="/login"
                     render={props => <LoginForm updateLogied={this.updateLogied} logied={this.state.logied } mode={this.state.mode } {...props} />}
                 />
             </Switch>
             <Header updateLogied = {this.updateLogied} logied={this.state.logied} mode={this.state.mode }/>
+            <AppNavBar BrandText="Happy english)" BrandLink="/about" Menu={MenuConst.NotLoginMenu} />
         </main>
         )
     }
 }
+
+

@@ -1,0 +1,1 @@
+//Later, in this place will be consts for different styles for different components of my app
