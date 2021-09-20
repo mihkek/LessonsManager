@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import React from 'react';
 import * as AppConstants from '../constants/AppConstants'
 import * as Routs from '../constants/Routs'
+import {AppNavBar} from './library/additional/Nav-bar'
+import * as MenuConst from '../constants/Menu'
 
  export class Header extends React.Component
  {
@@ -37,15 +39,17 @@ import * as Routs from '../constants/Routs'
           )
     }
         render() {
+           var currentMenu = MenuConst.NotLoginMenu
+           if(this.props.logied){
+               if(this.props.mode == AppConstants.ModeTeacher)
+                    currentMenu = MenuConst.TeacherMenu
+               if(this.props.mode == AppConstants.ModePupil)
+                    currentMenu = MenuConst.PupilMenu
+           }
            return(
             <header>
                 <nav>
-                    <ul>
-                    {this.props.logied && this.props.mode == AppConstants.ModeTeacher && this.teacherMenu() }
-                    {this.props.logied && this.props.mode == AppConstants.ModePupil && this.pupilMenu() }
-                    {this.staticMenu()}
-                    {this.props.logied ? this.logiedMenu(): this.notLoginMenu() }
-                    </ul>
+                    <AppNavBar BrandText="Happy english)" BrandLink="#" Menu={currentMenu} />
                 </nav>
                 </header>
             )

@@ -60,6 +60,7 @@ export class Main extends React.Component
     render(){
         return(
             <main>
+            <Header updateLogied = {this.updateLogied} logied={this.state.logied} mode={this.state.mode }/>
             <Switch>
                 <Route
                     path="/pupil"
@@ -75,8 +76,7 @@ export class Main extends React.Component
                     render={props => <LoginForm updateLogied={this.updateLogied} logied={this.state.logied } mode={this.state.mode } {...props} />}
                 />
             </Switch>
-            <Header updateLogied = {this.updateLogied} logied={this.state.logied} mode={this.state.mode }/>
-            <AppNavBar BrandText="Happy english)" BrandLink="/about" Menu={MenuConst.NotLoginMenu} />
+            {/* <AppNavBar BrandText="Happy english)" BrandLink="/about" Menu={MenuConst.TeacherMenu} /> */}
         </main>
         )
     }

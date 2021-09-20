@@ -16,32 +16,8 @@ export class AppNavBar extends React.Component{
     */
     constructor(props){
         super(props)
-        this.constructMenu = this.constructMenu.bind(this)
-    }
-    constructMenu(){
-        this.props.Menu.map(e => {
-            if((e.dropdownList != undefined)&&(e.dropdownList.length != 0)){
-                return(
-                    <React.Fragment>
-                           <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                              { e.dropdownList.map(drop => {
-                                     <Nav.Link href={drop.link}>{drop.text}</Nav.Link>
-                              })}
-                           </NavDropdown>
-                    </React.Fragment>
-                )
-            }
-            else{
-            return (
-                    <React.Fragment>
-                        <Nav.Link href={e.href}>{e.text}</Nav.Link>
-                    </React.Fragment>
-                )
-            }
-        })
     }
     render(){
-        console.log(this.props.Menu)
         return(
             <div>
             <div className="row">
@@ -51,41 +27,28 @@ export class AppNavBar extends React.Component{
                             <Navbar.Toggle aria-controls="basic-navbar-nav" />
                             <Navbar.Collapse id="basic-navbar-nav">
                                 <Nav className="mr-auto">
-                                    {
-                                        this.props.Menu.map(e => {
-                                                <Nav.Link href="/">sfsdf</Nav.Link>
-                                                console.log("DDDd")
-                                                // <Nav.Link href={e.href}>{e.text}</Nav.Link>
-                                        })
-                                    }
-                                {/* {this.constructMenu} */}
-                                {/* <Nav.Link href="/">Home</Nav.Link>
-    
-                                <Nav.Link href="/about-us">Contact Us</Nav.Link>
-    
-                                <Nav.Link href="/contact-us">About Us</Nav.Link>
-    
-                                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-    
-                                    <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-    
-                                    <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-    
-                                    <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-    
-                                    <NavDropdown.Divider />
-    
-                                    <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-    
-                                </NavDropdown> */}
-    
+                                
+                                        {this.props.Menu.map(e => (
+                                            <React.Fragment>
+                                            {e.dropdownList != undefined ? 
+                                                    <React.Fragment>
+                                                        <NavDropdown title={e.text} id="basic-nav-dropdown">
+                                                        {e.dropdownList.map(eIN => (
+                                                                <NavDropdown.Item href={eIN.href}>{eIN.text}</NavDropdown.Item>
+                                                            ))}
+                                                            </NavDropdown>
+                                                        </React.Fragment>
+                                               : <Nav.Link href={e.href}>{e.text}</Nav.Link> }
+                                          </React.Fragment>
+                                           
+                                        ))}       
                                 </Nav>
     
-                                <Form inline>
-    
-                                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-    
-                                <Button variant="outline-success">Search</Button>
+                                        <Form align="rigth">
+            
+                                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+            
+                                        <Button variant="outline-success">Search</Button>
     
                                 </Form>
     
