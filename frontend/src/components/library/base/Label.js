@@ -1,4 +1,5 @@
 import React from "react";
+import * as BaseCss from '../../../constants/Styles/DefaultStyles'
 
 export default class Label extends React.Component{
     constructor(props){
@@ -6,7 +7,8 @@ export default class Label extends React.Component{
     }
     render(){
         return(
-            <label htmlFor={this.props.name}>{this.props.label}</label>
+            <label className={this.props.cssClass} htmlFor={this.props.name}>{this.props.label}</label>
         )
     }
 }
+Label.defaultProps = {cssClass:BaseCss.labelClass};

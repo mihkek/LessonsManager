@@ -4,17 +4,16 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {User} from './Models/User'
 import {TeacherModule } from './teacher/teacher.module';
-import {AccessControl } from './Classes/AccessControl';
 import {TeacherController} from './teacher/teacher.controller'
 import {TeacherService } from './teacher/teacher.service'
 import {PupilModule } from './pupil/pupil.module';
 import {PupilController }from './pupil/pupil.controller';
-import   {PupilService}  from './pupil/pupil.service';
+import {PupilService}  from './pupil/pupil.service';
 import {Lesson} from './Models/Lessons'
+import {AccessControlModule } from './access-control/access-control.module';
+import {AccessControlController} from './access-control/access-control.controller'
+import {AccessControlService} from './access-control/access-control.service'
 
-
-//var accessControl = new AccessControl()
-module.exports.AccessControl = new AccessControl()//accessControl
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -29,9 +28,10 @@ module.exports.AccessControl = new AccessControl()//accessControl
       entities: [User, Lesson],
     }),
     TeacherModule,
-    PupilModule
+    PupilModule,
+    AccessControlModule
   ],
-  controllers: [AppController,TeacherController,PupilController],
-  providers: [AppService,TeacherService,PupilService],
+  controllers: [AppController,TeacherController,PupilController, AccessControlController],
+  providers: [AppService,TeacherService,PupilService, AccessControlService],
 })
 export class AppModule {}

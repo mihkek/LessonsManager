@@ -1,112 +1,18 @@
-import { Body, Controller, Get, HttpStatus, ParseIntPipe, Post, Redirect, Render, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Param, ParseIntPipe, Post, Redirect, Render, Req, Res } from '@nestjs/common';
 import { AppService } from './app.service';
 import {AccessControl} from './Classes/AccessControl'
 import {User} from './Models/User'
+import { Request,Response } from '@nestjs/common';
+import axios from 'axios';
+import QueryString from 'qs';
+const CircularJSON = require('circular-json')
+axios.defaults.baseURL = "http://localhost:3001"//port = 8080;
 
 @Controller()
 export class AppController {
-
-  constructor(private readonly appService: AppService) {}
-
-  @Get()
-  init(@Req() req, @Res() res)  {
-    AccessControl.startCheck(req,res)
-  }
-  @Get("login")
-  @Render("login")
-  login(@Req() req, @Res() res):any{
-    if(AccessControl.modeCheck(req, AccessControl.modeTeacher))
-    { 
-        res.redirect("/teacher/index")
-    }
-    if(AccessControl.modeCheck(req, AccessControl.modePupil))
-    { 
-        res.redirect("/pupil/index")
-    }
-    return
-    { 
-      isFall : false
-    }
-  }
-  @Get("testReact")
-  testReact(@Req() req, @Res() res)
-  {
-      res.json({
-        message: "Fuck! I received this shit from an another application!!!"
-      })
-  } 
-  @Get("pupilPage")
-  @Render("pupil")
-  pupilPage(@Req() req, @Res() res)
-  {
-     if(!AccessControl.modeCheck(req, AccessControl.modePupil))
-         res.redirect("login")
-     return;
-  }
-    
-  @Post("singIn")
-  async singIn(@Res() res,@Req() Req,
-    @Body() body: { login: string; password: string; mode:number },
-  ){
-     var user = await User.findOne({'login' : body.login, 'password' : body.password,'mode' : body.mode })
-     console.log("Body:")
-     console.log(body)
-     if(user == undefined){
-        console.log("not found")
-        //res.render("login", { isFall : true})
-        res.json(
-          {
-            message: "User with this login does not exist",
-            logied: false
-          })
-     }
-     else
-     {
-       res.cookie('isLogin', true)
-       res.cookie('mode',body.mode)
-       console.log("selected mode - "+body.mode)
-       console.log("teacher mode - " + AccessControl.modeTeacher)
-       if(body.mode == AccessControl.modePupil)
-       {
-          console.log("pupil mode")
-          //res.redirect("/pupil/pupilPage")
-          res.json(
-            {
-              logied: true,
-              mode: 2
-            }
-          )
-       }
-       else if(body.mode == AccessControl.modeTeacher)
-       {
-          console.log("teacher mode")
-          res.json(
-            {
-              logied: true,
-              mode: 1
-            })
-          //res.redirect("/teacher/index")
-       }
-       else
-       {
-          res.json(
-            {
-              message: "Your passwort is not correct. Try again",
-              logied: false
-            }
-          )
-       }
-       
-     }
-  }
-  @Get("logout")
-  @Redirect("login")
-  logout(@Res() res)
-  {
-    res.cookie('isLogin', false)
-    res.cookie('mode', 0)
-  }
+  constructor(private readonly appService: AppService) {}    
 }
+
 
 /* Dynamic redirect decorator usege
 @Redirect()
@@ -125,4 +31,29 @@ export class AppController {
   }
 
 */
+// @Get("/api/*")
+  // // async getApi(@Req() req: Request, @Res() res){
+  // //     console.log("Get to service - " + req.url)
+  // //     const service = req.url.replace("/api/", "")
+  // //     return res.redirect(service)
+  // // }
+  // @Post("/api/*")
+  // async postApi(@Req() req: Request, @Res() res){
+     
+  //     const service = req.url.replace("/api/", "")
+  //     console.log("Post to service - " + service)
+  //     axios.post(service, req.body)
+  //         .then((result) => {
+  //           //var res = CircularJSON.stringify(result)
+  //           console.log("Returned - " +result)
+  //           res.json( JSON.stringify(result))
+  //         })
+  //         .catch((err) => {
+  //           console.log(err)
+  //           res.json({
+  //             message: "Error in post-api calling. Check correct your query."
+  //             }
+  //           )
+  //         })
+  // }
 

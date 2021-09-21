@@ -4,7 +4,6 @@ import { SimpleForm } from '../library/additional/SimpleForm';
 import { SelectFieldWithLabel } from '../library/additional/SelectFieldWithLabel';
 import InputWithLabel from '../library/additional/InputWithLabel';
 
-
 import {
   Redirect,
 } from "react-router-dom"
@@ -44,7 +43,8 @@ export class LoginForm extends React.Component {
           });
             axios({
                 method: 'post', // THERE GOES THE METHOD
-                url: 'singIn', // THERE GOES THE URL
+                url: 'access-control/login', // THERE GOES THE URL
+                secure: true,
                 headers: {},
                 data: {
                     "login" : this.state.login,
@@ -57,16 +57,15 @@ export class LoginForm extends React.Component {
                     logied: response.data.logied,
                     message: response.data.message
                   });
-                  const funcName = "updateLogied"
                   this.props.updateLogied(response.data.logied,response.data.mode)
               })
-              .catch(() => {
-                const propName = "message"
-                this.setState({
-                  logied: false,
-                  [propName]: "Server error"
-                });
-              })
+              // .catch(() => {
+              //   const propName = "message"
+              //   this.setState({
+              //     logied: false,
+              //     [propName]: "Server error"
+              //   });
+              // })
        event.preventDefault();
     }
   
