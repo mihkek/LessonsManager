@@ -76,8 +76,8 @@ export class Main extends React.Component
     }
     someTest =() =>{
         axios({
-            method: 'post', // THERE GOES THE METHOD
-            url: 'access-control/register', // THERE GOES THE URL
+            method: 'post', 
+            url: 'access-control/register', 
             secure: true,
             headers: {},
             data: {
@@ -99,7 +99,7 @@ export class Main extends React.Component
                     render={props => <PupilPage  mode={this.state.mode } logied={this.state.logied } {...props} />}
                 />
                  <Route
-                    path="/leacher"
+                    path="/teacher"
                     render={props => <TeacherPage  mode={this.state.mode } logied={this.state.logied } {...props} />}
                 />
                 <Route path='/logout' render={ this.logout} />

@@ -7,19 +7,12 @@ export class Lesson extends BaseEntity
     id: number;
   
     @Column()
-    num: number;
-  
-    @Column()
     name: string;
 
     @Column()
     task : string
 
-    constructor(num:number, name: string, task: string,  id?: number) {
+    constructor() {
         super();
-        this.id = id;
-        this.num = num;
-        this.name = name;
-        this.task = task;
       }
 }
