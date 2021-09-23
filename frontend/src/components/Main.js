@@ -59,8 +59,8 @@ export class Main extends React.Component
             session_id:''
          })
          axios({
-            method: 'post', // THERE GOES THE METHOD
-            url: 'access-control/logout', // THERE GOES THE URL
+            method: 'post', 
+            url: 'access-control/logout', 
             secure: true,
             headers: {},
             data: {
