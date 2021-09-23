@@ -60,11 +60,12 @@ export class AccessControlService {
         session_id:session.session_id 
       })
    }
-   async getUserBySession(userId){
-     return (await SessinsStore.findOne({'id':userId})).user
+   async getGetSessionById(session_id){
+     var session =  await SessinsStore.findOne({'session_id':session_id})
+     return session
    }
-   async deleteUserSession(user){
-     SessinsStore.delete({'user':user}).then(function(){
+   async deleteUserSession(session){
+     SessinsStore.delete({'session_id':session.session_id}).then(function(){
         return ({
           status: true,
         })

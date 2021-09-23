@@ -58,7 +58,7 @@ export class LoginForm extends React.Component {
                     logied: response.data.logied,
                     message: response.data.message
                   });
-                  this.props.updateLogied(response.data.logied,response.data.mode)
+                  this.props.updateLogied(response.data.logied,response.data.mode, response.data.session_id)
               })
               // .catch(() => {
               //   const propName = "message"

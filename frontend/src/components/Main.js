@@ -24,28 +24,28 @@ export class Main extends React.Component
         super(props);
         const logg  = localStorage.getItem('logied') == "true" ? true : false
         const mod = parseInt(localStorage.getItem('mode'))
-       // const session_id = localStorage.getItem('session_id')
+        const session_id = localStorage.getItem('session_id')
         this.state = {
           logied: logg,
           mode: mod,
-         // session_id:session_id
+          session_id:session_id
         };
         console.log(this.state)
     }
-    updateLogied = (isLog, mode) => { 
-        console.log("Change - "+isLog)
+    updateLogied = (isLog, mode,session_id ) => { 
+      //  console.log("Change - "+isLog)
         if (!typeof isLog == 'boolean')
             isLog = false
         
         this.setState({ 
             logied: isLog,
             mode: mode,
-            //session_id:session_id
+            session_id:session_id
         })
        
         localStorage.setItem('logied', this.state.logied)
         localStorage.setItem('mode', this.state.mode)
-      //  localStorage.setItem('session_id', this.state.session_id)
+        localStorage.setItem('session_id', this.state.session_id)
 
         //console.log(" Storage logout - " + isLog)  
         return (
@@ -56,11 +56,20 @@ export class Main extends React.Component
         this.setState({ 
             logied: false,
             mode: 0,
-           // session_id:''
+            session_id:''
          })
+         axios({
+            method: 'post', // THERE GOES THE METHOD
+            url: 'access-control/logout', // THERE GOES THE URL
+            secure: true,
+            headers: {},
+            data: {
+                "session_id" : this.state.session_id,
+            }
+        })
          localStorage.setItem('logied', false)
          localStorage.setItem('mode', 0)
-        // localStorage.setItem('session_id', this.state.session_id)
+         localStorage.setItem('session_id', '')
         return (
             <Redirect to={Links.HOME.link}/>
         )
