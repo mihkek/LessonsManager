@@ -53,6 +53,7 @@ export class LoginForm extends React.Component {
                 }
             })
               .then(response => {
+                console.log("Taked -" + response.data.logied)
                 this.setState({
                     logied: response.data.logied,
                     message: response.data.message

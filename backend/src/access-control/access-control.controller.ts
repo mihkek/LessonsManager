@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Req, Res } from '@nestjs/common';
 import {AccessControlService} from '../access-control/access-control.service'
 import {CircularJSON} from 'circular-json'
 
@@ -10,14 +10,14 @@ export class AccessControlController {
         @Body() body: { login: string; password: string; mode:number },
     ){
         const info = await this.accessControlService.checkUser({'login' : body.login })
-       // console.log(info)
         if(!info.found){
           res.json({
                   message: "User with this login does not exist",
                   logied: false
                 })
         }
-        if(info.user.password != body.password){
+       
+        if(!this.accessControlService.compareHashPassword(body.password, info.user.password)){
           res.json({
                 message: "Incorrect pasword",
                 logied: false
@@ -29,10 +29,41 @@ export class AccessControlController {
                 logied: false
               })
         }
-      res.json({
-            logied: true,
-            mode: info.user.mode
+      var session = await this.accessControlService.createUserSession(info.user)
+      if(!session.status){
+        res.json({
+          message: "Cannot to create session for user. Error - "+session.message,
+          logied: false
         })
+      }
+      else
+          res.json({
+                logied: true,
+                mode: info.user.mode,
+                session_id : session.session_id
+            })
     }
+    @Post("register")
+    async register(@Res() res,@Req() Req,
+    @Body() body: { login: string; password: string; mode:number },
+    ){
+        const info = await this.accessControlService.checkUser({'login' : body.login })
+        if(info.found){
+          res.json({
+                  message: "User with this login already exists",
+                  register: false
+                })
+          }
+        else{
+           await this.accessControlService.registerUser({'login' : body.login, 'password' : body.password, 'mode' : body.mode })
+        }
+          //In the future check user by email will be here
+
+    } 
+    @Get("someTest/:p")
+    async testHash(@Param() p){
+        //console.log(this.accessControlService.hashPassword(JSON.stringify(p), this.accessControlService.generateSalt()))
+    }
+    
 
 }

@@ -13,6 +13,7 @@ import {Lesson} from './Models/Lessons'
 import {AccessControlModule } from './access-control/access-control.module';
 import {AccessControlController} from './access-control/access-control.controller'
 import {AccessControlService} from './access-control/access-control.service'
+import {SessinsStore} from './Models/SessinsStore'
 
 @Module({
   imports: [
@@ -25,7 +26,7 @@ import {AccessControlService} from './access-control/access-control.service'
       database: 'postgres',
       logging: true,
       synchronize: true,
-      entities: [User, Lesson],
+      entities: [User, Lesson, SessinsStore],
     }),
     TeacherModule,
     PupilModule,
