@@ -6,14 +6,26 @@ import * as BaseCss from '../../../constants/Styles/DefaultStyles'
 
 //Costom input field. 
 export default class InputField extends React.Component{
+    /*
+      Props:
+      1.Name - name of changing property
+      2.Type - type for input
+      3.Value - start value for input
+      4.OnChange - action,that will be start when input-data is changed
+      5.cssClass - css-class for style of component
+    */
     constructor(props){
         super(props)
-      //  typeof(props.cssClass) == "undefined" ? this.props.className=BaseCss.inputFieldClass : this.props.className = props.cssClass
     }
     render(){
         return(
             <div>
-                <input type={this.props.type} className={this.props.cssClass} name={this.props.name} value={this.props.login} onChange={this.props.onChange} />   
+                <input 
+                   type={this.props.type} 
+                   className={this.props.cssClass} 
+                   name={this.props.name}
+                   value={this.props.login} 
+                   onChange={this.props.onChange} />   
             </div>  
         )
     }

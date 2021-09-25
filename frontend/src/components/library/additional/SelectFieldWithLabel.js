@@ -7,6 +7,15 @@ export class SelectFieldWithLabel extends React.Component{
     constructor(props){
         super(props)
     }
+    /*
+      Props:
+      1.Name - name of changing property
+      2.Label - label text
+      3.Type - type for input
+      4.Value - start value for input
+      5.OnChange - action,that will be start when input-data is changed
+      6.Option - list of data for select
+    */
     render(){
         return(
             <div>

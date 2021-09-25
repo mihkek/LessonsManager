@@ -32,17 +32,15 @@ export default class TeacherPage extends React.Component {
 
     render(){
         if(!this.props.logied)
-            return (<div></div>)
+            return (<Redirect to='/'/>)
         
         if(this.props.mode != Constants.ModeTeacher)
-            return(
-                <Redirect to='/'/>
-            )
-        console.log(this.state.data)
+            return(<Redirect to='/'/>)
         return(
             <div>
                 <h1>TeacherPage</h1>
-                <LessonList data={this.state.data}/>
+                <LessonList data={this.state.data} pageRoute="/teacher" isReadOnly={false}/>
+                
             </div>
         )
     }

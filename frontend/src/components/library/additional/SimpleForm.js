@@ -2,8 +2,18 @@ import React from "react"
 import SubmitButton from "../base/SubmitButton";
 import * as BaseCss from '../../../constants/Styles/DefaultStyles'
 import '../../../constants/Styles/Css/SImpleForm.css'
+import LinkButton from "../base/LinkButton";
 
 export class SimpleForm extends React.Component{
+    /*
+      Props:
+      1.ButtonText - text for button on the form
+      2.Fields - list of components on the form
+      3.OnSublmit - action for form
+      4.Type - type for input
+      5.HasBack - set\not set link for go back to last page. 
+      6.backPageLink - link for go back to last page. If HasBack param = false, this param can be undefind
+    */
     constructor(props){
         super(props)
 
@@ -19,6 +29,7 @@ export class SimpleForm extends React.Component{
                                     ))}   
                         <SubmitButton type="submit" value={this.props.buttonText} style="width:40%"/> 
                     </div>
+                    {this.props.hasBack && <LinkButton href={this.props.backPageLink} text="back"/> }
                 </div>
             </form>
           );

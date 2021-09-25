@@ -6,6 +6,14 @@ import InputField from "../base/InputField"
 
 //Costom input field. 
 export default class InputWithLabel extends React.Component{
+    /*
+      Props:
+      1.Name - name of changing property
+      2.Label - label text
+      3.Type - type for input
+      4.Value - start value for input
+      5.OnChange - action,that will be start when input-data is changed
+    */
     constructor(props){
         super(props)
     }

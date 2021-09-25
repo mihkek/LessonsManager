@@ -5,6 +5,7 @@ import TeacherPage from './pages/TeacherPage';
 import PupilPage from './pages/PupilPage';
 import * as Links from '../constants/Routs'
 import axios from 'axios'
+import {LessonView} from './pages/elements/LessonView' 
 
 import {
     Route,
@@ -88,6 +89,14 @@ export class Main extends React.Component
         })
 
     }
+    SearchPage = ({ match, location }) => {
+        return (
+        <p>
+            <h1>Location Props: </h1>
+             {JSON.stringify(location, null, 2)} 
+          </p>
+        );
+      }
     render(){
         console.log("Session - "+this.state.session_id)
         return(
@@ -95,13 +104,31 @@ export class Main extends React.Component
             <Header updateLogied = {this.updateLogied} logied={this.state.logied} mode={this.state.mode }/>
             <Switch>
                 <Route
+                    exact 
                     path="/pupil"
                     render={props => <PupilPage  mode={this.state.mode } logied={this.state.logied } {...props} />}
                 />
                  <Route
+                     
                     path="/teacher"
                     render={props => <TeacherPage  mode={this.state.mode } logied={this.state.logied } {...props} />}
                 />
+
+
+                     {/* <Route
+                                    path="teacher/lesson/:id"
+                                    render={props => 
+                                        <LessonView 
+                                            pageForGoBack="teacher" 
+                                            canEdit={true} 
+                                            {...props} />}
+                                /> */}
+                 <Route
+                                    path="/teacher/lesson/:id"
+                                    render={
+                                        this.SearchPage 
+                                             }
+                                />
                 <Route path='/logout' render={ this.logout} />
                 <Route path='/test' render={ this.someTest} />
                 <Route

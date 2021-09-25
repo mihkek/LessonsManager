@@ -3,6 +3,15 @@ import * as BaseCss from '../../../constants/Styles/DefaultStyles'
 
 //Costom select field
 export default class SelectField extends React.Component{
+     /*
+      Props:
+      1.Name - name of changing property
+      2.Label - label text
+      3.Type - type for input
+      4.Value - start value for input
+      5.OnChange - action,that will be start when input-data is changed
+      6.Option - list of data for select
+    */
     constructor(props){
         super(props)
     }

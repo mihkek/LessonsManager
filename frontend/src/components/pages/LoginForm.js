@@ -96,7 +96,7 @@ export class LoginForm extends React.Component {
         <div>
             { this.state.submit && !this.state.logied && <h1>Error: {this.state.message}</h1>}
             { this.state.logied && <Redirect to='/'/>}
-            <SimpleForm fields={fields} onSubmit={this.handleSubmit} buttonText="Sing in"/>
+            <SimpleForm fields={fields} onSubmit={this.handleSubmit} buttonText="Sing in" hasBack={false}/>
         </div>
         
       );
