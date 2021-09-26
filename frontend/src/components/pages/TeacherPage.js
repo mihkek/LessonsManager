@@ -8,11 +8,7 @@ export default class TeacherPage extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            data : [
-                    // {name: 'test1',task:'task1',href:''},
-                    // {name: 'test2',task:'task2',href:''},
-                    // {name: 'test3',task:'task3',href:''},
-                ]
+            data : []
         }
         axios({
             method: 'get', 

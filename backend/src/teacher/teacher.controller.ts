@@ -34,9 +34,10 @@ export class TeacherController {
             })
     }
     @Post("changeLesson")
-    async logout(@Res() res,@Req() Req,
+    async lrogout(@Res() res,@Req() Req,
          @Body() body: { id: number; name:string; task: string },
     ){
+        console.log(body.name)
          var edit = await this.teacherService.editLesson({id:body.id, name:body.name, task:body.task})
              res.status(200).json({
                  status:edit.state,

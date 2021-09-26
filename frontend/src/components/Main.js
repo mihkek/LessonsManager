@@ -85,9 +85,9 @@ export class Main extends React.Component
             secure: true,
             headers: {},
             data: {
-                "login" : "teacher",
+                "login" : "pupil",
                 "password" : "12345",
-                "mode" : 2
+                "mode" : 1
             }
         })
 
@@ -126,7 +126,7 @@ export class Main extends React.Component
                                     render={props => 
                                         <LessonView 
                                             pageForGoBack="/teacher" 
-                                            canEdit={true} 
+                                            isReadOnly={false} 
                                             {...props} />}
                                 />
                                 <Route
@@ -134,7 +134,7 @@ export class Main extends React.Component
                                     render={props => 
                                         <LessonView 
                                             pageForGoBack="/pupil" 
-                                            canEdit={false} 
+                                            isReadOnly={true} 
                                             {...props} />}
                                 />
                 <Route path='/logout' render={ this.logout} />

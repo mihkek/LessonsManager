@@ -26,8 +26,8 @@ export class LessonList extends React.Component{
                         {this.props.data.map(e=>(
                         
                                 <ElemOfLessonList 
-                                    mode={this.props.mode} 
                                     name={e.name} task={e.task} 
+                                    isReadOnly = {this.props.isReadOnly}
                                     href={this.makeHrefForLesson("lesson", e.id)}/> 
                         
                         ))}

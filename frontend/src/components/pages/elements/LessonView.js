@@ -11,10 +11,12 @@ export class LessonView extends React.Component{
        Full view for lesson
        Props:
         1. ActionForSave - an action for change data
-        2. .... - some parameters, that i put here when my app will be ready for it
+        2. .... - some parameters, that i have to put here when my app will be ready for it
         3. PageForGoBack - link for come back to
-        4. CanEdit - if this props has false-value, you cannot will use this component in read-only mode
+        4. IsReadOnly - if this props has false-value, you will use this component in read-only mode
         5. ApiServicePath - api path for getting data
+        6. HrefForAdd - route path for add new lesson()
+        7. HRef
 
        Params in the route:
         1. LessonId - an unique lesson ID, that using for receiving data from api
@@ -27,6 +29,7 @@ export class LessonView extends React.Component{
         }
         this.handleInputChange = this.handleInputChange.bind(this)
         this.getLessonDataFromServer = this.getLessonDataFromServer.bind(this)
+        this.handleDataSave = this.handleDataSave.bind(this)
         this.getLessonDataFromServer()
     }
     getLessonDataFromServer(){
@@ -45,16 +48,16 @@ export class LessonView extends React.Component{
               });
           })
     }
-    handleDataSave(){
+    handleDataSave(event){
         axios({
             method: 'post', 
             url: '/teacher/changeLesson', 
             secure: true,
             headers: {},
             data: {
-                id:this.props.match.id,
-                name:this.state.name,
-                task:this.state.task
+                id:this.props.match.params.id,
+                name:this.state.lessonName,
+                task:this.state.lessonTask
             }
         })
           .then(response => {
@@ -69,6 +72,7 @@ export class LessonView extends React.Component{
                 message: "Cannot do request to API. Try again later"
               });
           })
+          event.preventDefault()
     }
     handleInputChange(event) {
         const target = event.target;
@@ -79,18 +83,15 @@ export class LessonView extends React.Component{
           });
     }
     render(){
-        var readOnly = undefined
-        if(!this.props.canEdit) readOnly=true
         return(
-            // <h1>Bulabalaba</h1>
             <React.Fragment>
                 {this.state.submitStatus != undefined && this.state.submitStatus == false && 
                         <h2>Error - {this.state.error}</h2>}
                 {this.state.submitStatus == true && <Redirect to={this.props.pageForGoBack}/>}
-                <form method="post" action={this.handleDataSave}>
-                    <InputWithLabel name="lessonName" label="Lesson name" type="text" readOnly={readOnly} value={this.state.lessonName} onChange={this.handleInputChange}/>
-                    <InputWithLabel name="lessonTask" label="Tasks for lesson" readOnly={readOnly} type="text" value={this.state.lessonTask} onChange={this.handleInputChange}/>
-                    {this.props.canEdit && <SubmitButton name="submit" text="save" value="Save"/>}
+                <form onSubmit={this.handleDataSave}>
+                    <InputWithLabel name="lessonName" label="Lesson name" type="text"  isReadOnly={this.props.isReadOnly} value={this.state.lessonName} onChange={this.handleInputChange}/>
+                    <InputWithLabel name="lessonTask" label="Tasks for lesson" isReadOnly={this.props.isReadOnly} type="text" value={this.state.lessonTask} onChange={this.handleInputChange}/>
+                    {!this.props.isReadOnly && <SubmitButton name="submit" text="save" value="Save"/>}
                     <LinkButton href={this.props.pageForGoBack} text="Back"/>
                 </form>
             </React.Fragment>
