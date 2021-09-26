@@ -6,6 +6,9 @@ import PupilPage from './pages/PupilPage';
 import * as Links from '../constants/Routs'
 import axios from 'axios'
 import {LessonView} from './pages/elements/LessonView' 
+import * as WorkMode from '../constants/AppConstants'
+import { NotFound } from './library/additional/NotFound404';
+
 
 import {
     Route,
@@ -82,7 +85,7 @@ export class Main extends React.Component
             secure: true,
             headers: {},
             data: {
-                "login" : "pupil",
+                "login" : "teacher",
                 "password" : "12345",
                 "mode" : 2
             }
@@ -94,11 +97,13 @@ export class Main extends React.Component
         <p>
             <h1>Location Props: </h1>
              {JSON.stringify(location, null, 2)} 
+             {JSON.stringify(match, null, 2)} 
           </p>
         );
       }
     render(){
         console.log("Session - "+this.state.session_id)
+        console.log(this.state.mode)
         return(
             <main>
             <Header updateLogied = {this.updateLogied} logied={this.state.logied} mode={this.state.mode }/>
@@ -109,25 +114,28 @@ export class Main extends React.Component
                     render={props => <PupilPage  mode={this.state.mode } logied={this.state.logied } {...props} />}
                 />
                  <Route
-                     
+                    exact
                     path="/teacher"
                     render={props => <TeacherPage  mode={this.state.mode } logied={this.state.logied } {...props} />}
                 />
+                <Route path="not_found" component={NotFound}/>
 
 
-                     {/* <Route
-                                    path="teacher/lesson/:id"
+                                <Route
+                                    path="/teacher/lesson/:id"
                                     render={props => 
                                         <LessonView 
-                                            pageForGoBack="teacher" 
+                                            pageForGoBack="/teacher" 
                                             canEdit={true} 
                                             {...props} />}
-                                /> */}
-                 <Route
-                                    path="/teacher/lesson/:id"
-                                    render={
-                                        this.SearchPage 
-                                             }
+                                />
+                                <Route
+                                    path="/pupil/lesson/:id"
+                                    render={props => 
+                                        <LessonView 
+                                            pageForGoBack="/pupil" 
+                                            canEdit={false} 
+                                            {...props} />}
                                 />
                 <Route path='/logout' render={ this.logout} />
                 <Route path='/test' render={ this.someTest} />
@@ -136,7 +144,6 @@ export class Main extends React.Component
                     render={props => <LoginForm updateLogied={this.updateLogied} logied={this.state.logied } mode={this.state.mode } {...props} />}
                 />
             </Switch>
-            {/* <AppNavBar BrandText="Happy english)" BrandLink="/about" Menu={MenuConst.TeacherMenu} /> */}
         </main>
         )
     }

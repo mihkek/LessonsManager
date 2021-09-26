@@ -6,7 +6,7 @@ import { Route,Link } from 'react-router-dom';
 export class LessonList extends React.Component{
     /*
        Props:
-       1.PageRoute - route for page, when the component is
+       1.PageRoute - route for page, where the component is
        2.IsReadOnly - if this param is false, it means that you cannot editData
     */
     constructor(props){
@@ -19,16 +19,16 @@ export class LessonList extends React.Component{
     makeHrefForLesson = (mainLink, idLesson) => {
         return this.props.pageRoute+"/"+ mainLink+"/"+idLesson    
     }
-    makeFullPathToLesson(){
-        return this.props.pageRoute+"/lesson/:id"
-    }
     render(){
         return(
             <div>
                  <React.Fragment>
                         {this.props.data.map(e=>(
                         
-                                <ElemOfLessonList name={e.name} task={e.task} href={this.makeHrefForLesson("lesson", e.id)}/> 
+                                <ElemOfLessonList 
+                                    mode={this.props.mode} 
+                                    name={e.name} task={e.task} 
+                                    href={this.makeHrefForLesson("lesson", e.id)}/> 
                         
                         ))}
                   </React.Fragment>

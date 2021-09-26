@@ -18,10 +18,12 @@ export default class InputWithLabel extends React.Component{
         super(props)
     }
     render(){
+        var readOnly = this.props.readOnly
+        // if(this.props.readOnly )
         return(
             <div>
                 <Label name= {this.props.name} label={this.props.label}/>
-                <InputField type={this.props.type} name={this.props.name} value={this.props.login} onChange={this.props.onChange}/>
+                <InputField type={this.props.type} name={this.props.name} readOnly={readOnly} value={this.props.value} onChange={this.props.onChange}/>
             </div>  
         )
     }

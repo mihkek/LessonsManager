@@ -2,7 +2,7 @@ import React from "react"
 import * as BaseCss from '../../../constants/Styles/DefaultStyles'
 
 export default class SubmitButton extends React.Component{
-     /*
+     /* 
       Props:
       1.Name - name of changing property
       2.Value - start value for input

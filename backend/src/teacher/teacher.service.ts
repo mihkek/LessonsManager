@@ -1,9 +1,10 @@
 import { HttpStatus, Injectable, NotFoundException, Res } from '@nestjs/common';
+import { stat } from 'fs';
 import { Lesson } from '../Models/Lessons';
 
 @Injectable()
 export class TeacherService {
-     async getLessons(params){
+     async getAllLessons(params){
         var message = ''
         var state = true 
         var lessons = await Lesson.find()
@@ -13,6 +14,17 @@ export class TeacherService {
             message:message
         })
      } 
+     async getOneLesson(id){
+        console.log("Get id - "+id)
+         var lesson = await Lesson.findOne({'id':id})
+         var state = true
+         if(lesson) state = true
+         else state = false
+         return({
+             state:state,
+             lesson:lesson
+         })
+     }
      async addLesson(params)
      {
          var lesson = new Lesson()
@@ -33,7 +45,7 @@ export class TeacherService {
      }
      async editLesson(params)
      {
-         var lesson = new Lesson()
+         var lesson = await Lesson.findOne({'id':params.id})
          lesson.name = params.name
          lesson.task = params.task
          var state = false
@@ -41,8 +53,8 @@ export class TeacherService {
          await lesson.save().then(result=>{
                     state = true
                 }, error =>{
-                state = false
-                message = error
+                    state = false
+                    message = error
             })
          return ({
              state : state,

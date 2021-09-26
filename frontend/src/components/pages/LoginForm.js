@@ -92,10 +92,12 @@ export class LoginForm extends React.Component {
           data:  <SelectFieldWithLabel label="Mode" name="mode" value={this.state.mode} onChange={this.handleInputChange} options={options} />
         }
       ]
+      console.log("Form logied - "+ this.state.logied)
       return (
         <div>
             { this.state.submit && !this.state.logied && <h1>Error: {this.state.message}</h1>}
             { this.state.logied && <Redirect to='/'/>}
+            { this.props.logied && <Redirect to='/'/>}
             <SimpleForm fields={fields} onSubmit={this.handleSubmit} buttonText="Sing in" hasBack={false}/>
         </div>
         

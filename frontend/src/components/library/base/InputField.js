@@ -13,19 +13,23 @@ export default class InputField extends React.Component{
       3.Value - start value for input
       4.OnChange - action,that will be start when input-data is changed
       5.cssClass - css-class for style of component
+      6.ReadOnly - readOnlyFlag
     */
     constructor(props){
         super(props)
     }
     render(){
+        var opts = {}
+        if(this.props.readOnly != undefined) opts['readOnly'] = 'readOnly'
         return(
             <div>
                 <input 
                    type={this.props.type} 
                    className={this.props.cssClass} 
                    name={this.props.name}
-                   value={this.props.login} 
-                   onChange={this.props.onChange} />   
+                   value={this.props.value} 
+                   onChange={this.props.onChange}
+                   {...opts}  />   
             </div>  
         )
     }
