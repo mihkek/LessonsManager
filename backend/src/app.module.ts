@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -14,6 +14,8 @@ import {AccessControlModule } from './access-control/access-control.module';
 import {AccessControlController} from './access-control/access-control.controller'
 import {AccessControlService} from './access-control/access-control.service'
 import {SessinsStore} from './Models/SessinsStore'
+import { LessonsManagerService } from './lessons-manager/lessons-manager.service';
+import { ApiRedirectMiddleware } from './middlewares/api_redirect';
 
 @Module({
   imports: [
@@ -33,6 +35,12 @@ import {SessinsStore} from './Models/SessinsStore'
     AccessControlModule
   ],
   controllers: [AppController,TeacherController,PupilController, AccessControlController],
-  providers: [AppService,TeacherService,PupilService, AccessControlService],
+  providers: [AppService,TeacherService,PupilService, AccessControlService, LessonsManagerService],
 })
-export class AppModule {}
+export class AppModule  implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(ApiRedirectMiddleware)
+      .forRoutes("/api");
+  }
+}

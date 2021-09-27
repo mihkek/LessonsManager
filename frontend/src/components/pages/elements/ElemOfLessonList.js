@@ -4,8 +4,8 @@ import * as CiteMode from '../../../constants/AppConstants'
 export class ElemOfLessonList extends React.Component{
     /*
       Props:
-      2.IsReadOnly - if this param is false, it means that you cannot editData
-      2.HrefToDelete - link to a delete lesson action
+      1.IsReadOnly - if this param is false, it means that you cannot editData
+      2.ApiUrl - url, that component and his childs will use for API-requests
     */
     constructor(props){
         super(props)

@@ -3,7 +3,8 @@ import * as Constants from '../../../constants/AppConstants'
 import {Redirect} from "react-router-dom"
 import { LessonList } from '../elements/LessonList';
 import axios from 'axios';
-
+import * as UrlConstructor from '../../../functions/UrlConstructor'
+ 
 export default class LessonsPage extends React.Component {
     /* 
         Base page for work with lessons
@@ -22,15 +23,8 @@ export default class LessonsPage extends React.Component {
         this.getData = this.getData.bind(this)
         this.getData()
     }
-    constructUrl(baseUrl, routes){
-        var url = baseUrl+"/"
-        routes.map(elem => {
-            url+= elem
-        })
-        return url
-    }
     getData(){
-        var url = this.constructUrl(this.props.apiUrl, ["lessons"])
+        var url = UrlConstructor.constructUrl(this.props.apiUrl, ["lessons"])
         axios({
             method: 'get', 
             url: url, 

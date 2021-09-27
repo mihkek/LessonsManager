@@ -126,6 +126,7 @@ export class Main extends React.Component
                                     render={props => 
                                         <LessonView 
                                             pageForGoBack="/teacher" 
+                                            apiUrl="/teacher"
                                             isReadOnly={false} 
                                             {...props} />}
                                 />
@@ -134,6 +135,7 @@ export class Main extends React.Component
                                     render={props => 
                                         <LessonView 
                                             pageForGoBack="/pupil" 
+                                            apiUrl="/pupil"
                                             isReadOnly={true} 
                                             {...props} />}
                                 />

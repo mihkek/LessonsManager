@@ -5,6 +5,7 @@ import LinkButton from '../../library/base/LinkButton'
 import SubmitButton from '../../library/base/SubmitButton'
 import axios from 'axios';
 import { Redirect } from 'react-router';
+import * as UrlConstructor from '../../../functions/UrlConstructor'
 
 export class LessonView extends React.Component{
     /*
@@ -33,9 +34,10 @@ export class LessonView extends React.Component{
         this.getLessonDataFromServer()
     }
     getLessonDataFromServer(){
+        var url = UrlConstructor.constructUrl(this.props.apiUrl, ["viewLesson/",this.props.match.params.id ])
         axios({
             method: 'get', 
-            url: '/teacher/viewLesson/'+this.props.match.params.id, 
+            url: url, 
             secure: true,
             headers: {},
             data: {}
@@ -49,9 +51,10 @@ export class LessonView extends React.Component{
           })
     }
     handleDataSave(event){
+        var url = UrlConstructor.constructUrl(this.props.apiUrl, ["changeLesson" ])
         axios({
             method: 'post', 
-            url: '/teacher/changeLesson', 
+            url: url, 
             secure: true,
             headers: {},
             data: {

@@ -9,12 +9,11 @@ export default class PupilPage extends React.Component {
     constructor(props){
         super(props)
     }
-
     render(){
         return(
             <div>
                 <LessonsPage 
-                    apiUrl="teacher" 
+                    apiUrl="pupil" 
                     logied={this.props.logied}
                     targetMode={Constants.ModePupil} 
                     mode={this.props.mode} 
