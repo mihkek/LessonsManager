@@ -2,10 +2,13 @@ import { PupilService } from './pupil.service';
 import { Body, Controller, Get, Param, Post, Render, Req, Res } from '@nestjs/common';
 import { identity } from 'rxjs';
 import {LessonsManagerService} from '../lessons-manager/lessons-manager.service'
+import { AccessControlService } from 'src/access-control/access-control.service';
 
 @Controller('pupil')
 export class PupilController {
-    constructor(private teacherService: PupilService, private lessonsManagerService:LessonsManagerService) { }
+    constructor(private pupilService: PupilService, 
+                private lessonsManagerService:LessonsManagerService, 
+                private accessControlService: AccessControlService) { }
     @Get("lessons")
     async getLessons(@Req() req, @Res() res)
     {

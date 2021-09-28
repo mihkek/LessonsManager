@@ -6,18 +6,13 @@ import PupilPage from './pages/PupilPage';
 import * as Links from '../constants/Routs'
 import axios from 'axios'
 import {LessonView} from './pages/elements/LessonView' 
-import * as WorkMode from '../constants/AppConstants'
 import { NotFound } from './library/additional/NotFound404';
 
 
 import {
     Route,
     Switch,
-    Router,
-    BrowserRouter,
-    Link,
     Redirect,
-    withRouter
   } from "react-router-dom"
       
 
@@ -37,7 +32,6 @@ export class Main extends React.Component
         console.log(this.state)
     }
     updateLogied = (isLog, mode,session_id ) => { 
-      //  console.log("Change - "+isLog)
         if (!typeof isLog == 'boolean')
             isLog = false
         
@@ -50,27 +44,25 @@ export class Main extends React.Component
         localStorage.setItem('logied', this.state.logied)
         localStorage.setItem('mode', this.state.mode)
         localStorage.setItem('session_id', this.state.session_id)
-
-        //console.log(" Storage logout - " + isLog)  
         return (
             <Redirect to={Links.HOME.link}/>
         )
     }
     logout = () => {
-        this.setState({ 
-            logied: false,
-            mode: 0,
-            session_id:''
-         })
          axios({
             method: 'post', 
             url: 'access-control/logout', 
             secure: true,
             headers: {},
             data: {
-                "session_id" : this.state.session_id,
+                "session_id" : localStorage.getItem('session_id'),
             }
         })
+         this.setState({ 
+            logied: false,
+            mode: 0,
+            session_id:''
+         })
          localStorage.setItem('logied', false)
          localStorage.setItem('mode', 0)
          localStorage.setItem('session_id', '')

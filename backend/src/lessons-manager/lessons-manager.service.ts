@@ -1,5 +1,4 @@
-import { HttpStatus, Injectable, NotFoundException, Res } from '@nestjs/common';
-import { stat } from 'fs';
+import { Injectable } from '@nestjs/common';
 import { Lesson } from '../Models/Lessons';
 
 @Injectable()

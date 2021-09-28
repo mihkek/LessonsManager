@@ -35,12 +35,17 @@ export class LessonView extends React.Component{
     }
     getLessonDataFromServer(){
         var url = UrlConstructor.constructUrl(this.props.apiUrl, ["viewLesson/",this.props.match.params.id ])
+        var session_id = localStorage.getItem('session_id')
         axios({
             method: 'get', 
             url: url, 
             secure: true,
             headers: {},
-            data: {}
+            data: {
+            },
+            params: {
+                "session_id" : session_id
+            }
         })
           .then(response => {
             console.log("Taked -" + response.data.lesson.name)
@@ -52,6 +57,7 @@ export class LessonView extends React.Component{
     }
     handleDataSave(event){
         var url = UrlConstructor.constructUrl(this.props.apiUrl, ["changeLesson" ])
+        var session_id = localStorage.getItem('session_id')
         axios({
             method: 'post', 
             url: url, 
@@ -60,7 +66,8 @@ export class LessonView extends React.Component{
             data: {
                 id:this.props.match.params.id,
                 name:this.state.lessonName,
-                task:this.state.lessonTask
+                task:this.state.lessonTask,
+                session_id : session_id
             }
         })
           .then(response => {

@@ -16,5 +16,8 @@ export class SessinsStore extends BaseEntity
     constructor(){
       super()
     }
+    static getTableName(){
+      return "sessions_store"
+    }
 
 }

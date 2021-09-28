@@ -6,8 +6,6 @@ var crypto = require('crypto');
 
 @Injectable()
 export class AccessControlService {
-   static modePupil : number= 1
-   static modeTeacher : number = 2
    async checkUser(params){
        var user = await User.findOne(params)
        if(user == undefined){
@@ -60,12 +58,22 @@ export class AccessControlService {
         session_id:session.session_id 
       })
    }
-   async getGetSessionById(session_id){
-     var session =  await SessinsStore.findOne({'session_id':session_id})
-     return session
+   async getSessionBySession_id(session_id){
+     var session =  await SessinsStore.findOne({'session_id':session_id}, {relations:['user']})
+     console.log(session)
+     if(!session){
+       return {
+         found: false
+       }
+     }else{
+       return{
+         found:true,
+         session:session
+       }
+     }
    }
-   async deleteUserSession(session){
-     SessinsStore.delete({'session_id':session.session_id}).then(function(){
+   async deleteUserSession(session_id){
+     SessinsStore.delete({'session_id':session_id}).then(function(){
         return ({
           status: true,
         })
@@ -77,7 +85,7 @@ export class AccessControlService {
      })
    }
    compareHashPassword(password, hash){
-    return bcrypt.compare(password, hash)
+     return bcrypt.compare(password, hash)
   }
    private generateSessionId(){
       return crypto.randomBytes(16).toString('base64');

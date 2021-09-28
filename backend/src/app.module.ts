@@ -16,6 +16,8 @@ import {AccessControlService} from './access-control/access-control.service'
 import {SessinsStore} from './Models/SessinsStore'
 import { LessonsManagerService } from './lessons-manager/lessons-manager.service';
 import { ApiRedirectMiddleware } from './middlewares/api_redirect';
+import { PupilSecureMiddleware } from './middlewares/pupil_secure';
+import { TeacherSecureMiddleware } from './middlewares/teacher_secure';
 
 @Module({
   imports: [
@@ -41,6 +43,13 @@ export class AppModule  implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(ApiRedirectMiddleware)
-      .forRoutes("/api");
+      .forRoutes("/");
+    consumer
+      .apply(PupilSecureMiddleware)
+      .forRoutes("/pupil")
+    consumer
+      .apply(TeacherSecureMiddleware)
+      .forRoutes("/teacher")
   }
+  
 }

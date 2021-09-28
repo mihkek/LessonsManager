@@ -18,22 +18,25 @@ export default class LessonsPage extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            data : []
+            data : [],
+            badResponse:false
         }
         this.getData = this.getData.bind(this)
         this.getData()
     }
     getData(){
-        var url = UrlConstructor.constructUrl(this.props.apiUrl, ["lessons"])
+        var url = UrlConstructor.constructUrl(this.props.apiUrl, ["lessons"]) 
+        var session_id = localStorage.getItem('session_id')  
         axios({
             method: 'get', 
             url: url, 
             secure: true,
             headers: {},
-            data: {
-                
+            params: {
+                "session_id" : session_id
             }
         }) .then(response => {
+            console.log(response.status)
             this.setState({
                 data: response.data.data,
               });

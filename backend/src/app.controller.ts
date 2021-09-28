@@ -1,11 +1,6 @@
-import { Body, Controller, Get, HttpStatus, Param, ParseIntPipe, Post, Redirect, Render, Req, Res } from '@nestjs/common';
+import {  Controller } from '@nestjs/common';
 import { AppService } from './app.service';
-import {AccessControl} from './Classes/AccessControl'
-import {User} from './Models/User'
-import { Request,Response } from '@nestjs/common';
 import axios from 'axios';
-import QueryString from 'qs';
-const CircularJSON = require('circular-json')
 axios.defaults.baseURL = "http://localhost:3001"//port = 8080;
 
 @Controller()

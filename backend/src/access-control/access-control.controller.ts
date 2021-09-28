@@ -1,7 +1,5 @@
 import { Body, Controller, Get, Param, Post, Req, Res } from '@nestjs/common';
 import {AccessControlService} from '../access-control/access-control.service'
-import {CircularJSON} from 'circular-json'
-import { User } from 'src/Models/User';
 
 @Controller('access-control')
 export class AccessControlController {
@@ -48,8 +46,8 @@ export class AccessControlController {
     async logout(@Res() res,@Req() Req,
     @Body() body: { session_id: string; },
     ){
-        let user = await this.accessControlService.getGetSessionById(body.session_id)
-        await this.accessControlService.deleteUserSession(user).then(resolve=>{
+      console.log( "Logout - "+body.session_id)
+      await this.accessControlService.deleteUserSession(body.session_id).then(resolve=>{
                 res.status(200)
             },reject=>{
                 res.status(500)
@@ -70,7 +68,6 @@ export class AccessControlController {
            await this.accessControlService.registerUser({'login' : body.login, 'password' : body.password, 'mode' : body.mode })
                   .then(resolve=>{res.status(200)}, rejects=>{res.status(500)})
         }
-          //In the future check user by email will be here
 
     } 
     @Get("someTest/:p")
