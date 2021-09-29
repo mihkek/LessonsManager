@@ -1,0 +1,275 @@
+
+/* логотип */
+.logo {
+    display: block;
+    float: left;
+    margin-left: 10%;
+ }
+ .logo span {
+    color: white;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    margin: 5px 0;
+    text-align: center;
+    text-shadow: 2px 2px 1px rgba(0, 0, 0, .4);
+ }
+ .logo span:nth-child(1n) {
+    background: #3b3ba5;
+ }
+ 
+ .logo span:nth-child(2n) {
+    background:  #e77664;
+ }
+ body{
+    background: rgba(247,247,247,255);
+ }
+
+/*Costum styles */
+*, *:after, *:before {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    transition: .5s ease-in-out;
+    /* добавим плавность переходов для всех элементов страницы*/
+ }
+ ul {
+    list-style: none; /*  */
+ }
+ a {
+    text-decoration: none !important; /* Стиль текста(подчеркивания, зачеркивания и тд)*/
+    outline: none !important; /*Похожа на border, но не влияет на ширину элемента, и задаётся сразу по всей границе*/
+ }
+ img {
+    display: block;
+    width: 100%;
+ }
+ h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display';
+    font-weight: normal;
+    letter-spacing: 1px;
+ }
+  
+ body {
+    font-family: 'Open Sans', arial, sans-serif;
+    font-size: 14px;
+    line-height: 1;
+    color: #373737;
+    background: #f1efef !important;
+ }
+ /* добавим очистку потока для всех контейнеров, внутри которых задано обтекание дочерних элементов */
+ header:after, .container:after, footer:after, .widget-posts-list li:after, #subscribe:after {
+    content: "";
+    display: table;
+    clear: both; /*Задаем запрет обтекания элемента. Тут с обоих сторон*/
+ }
+ 
+ .wrapper{
+     padding-left: 10%;
+     padding-right: 10%;
+ }
+ /* стилевой класс, который управляет шириной контейнера сетки*/
+ .container {
+    margin: 0 auto;
+    width: 70%;
+    max-width: 70%;
+    padding: 0 15px;
+    margin-top: 2%;
+ }
+ .menu-link { 
+     font-family: 'Open Sans', arial, sans-serif !important;
+     font-size: 19px !important;
+     line-height: 1 !important;
+     color: #373737 !important;
+ }
+
+ .menu-link:hover{
+     color: brown !important;
+ }
+.main-menu {
+    display: block;
+    float: left !important;
+    white-space: nowrap !important;
+    color: black !important;
+ }
+ .main-menu img{
+    border:rgba(0, 0, 0, .05);
+    border-radius: 50%;
+    width: 20%;
+    height: 20%;
+    /* float: right;
+    position: relative;
+    display: block; */
+    overflow: hidden; /*Если в блоке вышло за границы - скрываем нахуй*/
+ }
+ .main-menu li {
+    display: inline-block;
+ }
+ .main-menu a {
+    color: #111;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    display: block;
+    line-height: 40px;
+ } 
+.hint{
+    margin-right: 10px;
+    color: black;
+}
+ .profile-image{
+    width: 5%;
+    height:5%;
+    /* display: block; */
+    background: 50% 50% no-repeat;
+    float: right;
+    border-radius: 60% ;
+ }
+ .profile-user-image{
+    width: 30%;
+    height:50%;
+    /* display: block; */
+    background: 50% 50% no-repeat;
+    float: left;
+    border-radius: 110% ;
+ }
+ /* левый контейнер */
+ .lessons-list {
+    margin-bottom: 30px; 
+    width: 64%;
+    float: left;
+ }
+ 
+ /* блок для статьи */
+ .lesson {
+    margin-bottom: 35px;
+    background-color: white;
+    padding: 5%;
+ }
+ .lesson-content p {
+    line-height: 1.5;
+    padding-bottom: 1em;
+ }
+ .lesson-image {
+    margin-bottom: 30px;
+    width: 5%;
+    float: right;
+ }
+ .chat-link{
+     width: 5%;
+     height: 5%;
+ }
+ 
+ .pupil-info {
+    margin-bottom: 15px;
+ }
+ .pupil-info a {
+    color: #65adaa;
+    text-transform: uppercase;
+ }
+ .lesson-title {
+    margin-bottom: 12px;
+    font-size: 26px;
+ }
+ .lesson-footer {
+    border-top: 1px solid #EBEBE3;
+    border-bottom: 1px solid #EBEBE3;
+    position: relative;
+    margin-top: 15px;
+ }
+ .more-link {
+    position: relative;
+    display: inline-block;
+    font-size: 10px;
+    text-transform: uppercase;
+    color: white;
+    line-height: 44px;
+    padding: 0 22px;
+    background: #3C3D41;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+ }
+ .more-link:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 0;
+    right: 0;
+    border: solid transparent;
+    border-width: 22px 18px;
+    border-left-color: #3C3D41;
+    transform: translateX(100%); /*Сдвиг элемента на заданное расстояние. Само свойство transform - позволияет различным образом сдвигать, вращать и тд*/
+ }
+ /* правый контейнер */
+ aside {
+    width: 33%;
+    float: right;
+ }
+ /* блок для виджетов */
+ .widget {
+    padding: 20px 15px;
+    background: white;
+    font-size: 16px;
+    margin-bottom: 30px;
+    box-shadow: 3px 3px 1px rgba(0, 0, 0, .05);
+ }
+ .widget-title {
+    font-size: 18px;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    border: 2px solid #F8B763;
+    box-shadow: 3px 3px 0 0 #F8B763;
+ }
+ .widget-category-list li {
+    border-bottom: 1px solid #EBEBE3;
+    padding: 10px 0;
+    color: #c6c6c6;
+    font-style: italic;
+ }
+ .widget-category-list li:last-child {
+    border-bottom: none;
+    color: #921f1f;
+    font-style: italic;
+ }  
+ 
+ .widget-category-list li a {
+    color: #626262;
+    margin-right: 6px;
+    font-style: normal;
+ }
+ .widget-category-list li a:before {
+    display: inline-block;
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+    color: #c6c6c6;
+ }
+ 
+ footer {
+    padding: 30px 0;
+    background: #3C3D41;
+    color: white;
+  
+ }
+ .footer-col {
+    width: 33.3333333333%;
+    float: left;
+ }
+ .footer-col a {
+    color: white;
+ }
+ .footer-col:last-child {
+    text-align: right;
+ }
+ .social-bar-wrap {
+    text-align: center;
+ }
+ .social-bar-wrap a {
+    padding: 0 7px;
+    font-size: 18px;
+ }
+ 

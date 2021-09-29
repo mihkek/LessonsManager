@@ -1,6 +1,9 @@
 import React from "react";
 import react from "react";
 import { NavLink, Navbar,NavDropdown,Nav, Container, Form, FormControl, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Image } from "react-bootstrap";
+import profileLink from './profileLink.png'
 
 export class AppNavBar extends React.Component{
     /*Input
@@ -19,53 +22,52 @@ export class AppNavBar extends React.Component{
     }
     render(){
         return(
-            <div>
-            <div className="row">
-                <div className="col-md-12">
-                        <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
-                            <Navbar.Brand href={this.props.BrandLink}>{this.props.BrandText}</Navbar.Brand>
+            <div className="container-fluid">
+                   
+                        <Navbar bg="light" variant="dark" expand="lg" sticky="top">
+                            <Navbar.Brand className="logo" href={this.props.BrandLink}>
+                                    <Link class="navbar-brand logo"  to={this.props.BrandLink}>
+                                        <span>E</span>
+                                        <span>N</span>
+                                        <span>G</span>
+                                        <span>L</span>
+                                        <span>I</span> 
+                                        <span>S</span>
+                                        <span>H</span>
+                                    </Link>
+                            </Navbar.Brand>
                             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                            <Navbar.Collapse id="basic-navbar-nav">
+                            <Navbar.Collapse id="navbarSupportedContent">
                                 <Nav className="mr-auto">
                                 
                                         {this.props.Menu.map(e => (
                                             <React.Fragment>
                                             {e.dropdownList != undefined ? 
                                                     <React.Fragment>
-                                                        <NavDropdown title={e.text} id="basic-nav-dropdown">
+                                                        <NavDropdown title={e.text} id="basic-nav-dropdown" className="nav-item menu-link">
                                                         {e.dropdownList.map(eIN => (
                                                                 <NavDropdown.Item href={eIN.href}>{eIN.text}</NavDropdown.Item>
                                                             ))}
                                                             </NavDropdown>
                                                         </React.Fragment>
-                                               : <Nav.Link href={e.href}>{e.text}</Nav.Link> }
+                                               : <Nav.Link className="nav-item menu-link" href={e.href}>{e.text}</Nav.Link> }
                                           </React.Fragment>
                                            
-                                        ))}       
+                                        ))}     
+                              
                                 </Nav>
     
-                                        <Form align="rigth">
-            
-                                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            
-                                        <Button variant="outline-success">Search</Button>
-    
-                                </Form>
     
                             </Navbar.Collapse>
-    
+                            <p className = "hint">My account</p> <Image  className = "profile-image" src={profileLink}/>
                         </Navbar>
-    
+                     
                         <br />
     
                        
         
     
                 </div>
-    
-            </div>
-    
-        </div>
     
         )
     }

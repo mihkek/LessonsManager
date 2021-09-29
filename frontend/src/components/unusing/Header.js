@@ -48,7 +48,7 @@ import * as MenuConst from '../constants/Menu'
            }
            return(
             <header>
-                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <nav>
                     <AppNavBar BrandText="Happy english)" BrandLink="#" Menu={currentMenu} />
                 </nav>
                 </header>
