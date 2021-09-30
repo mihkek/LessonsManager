@@ -85,7 +85,7 @@ export class AccessControlService {
      })
    }
    compareHashPassword(password, hash){
-     return bcrypt.compare(password, hash)
+     return bcrypt.compareSync(password, hash)
   }
    private generateSessionId(){
       return crypto.randomBytes(16).toString('base64');

@@ -21,27 +21,26 @@ export class Main extends React.Component
 {
     constructor(props) {
         super(props);
-        const logg  = localStorage.getItem('logied') == "true" ? true : false
-        const mod = parseInt(localStorage.getItem('mode'))
+       // const logg  = localStorage.getItem('logied') == "true" ? true : false
+        const mod = parseInt(localStorage.getItem('mode')) || 0
         const session_id = localStorage.getItem('session_id')
         this.state = {
-          logied: logg,
           mode: mod,
           session_id:session_id
         };
         console.log(this.state)
     }
     updateLogied = (isLog, mode,session_id ) => { 
-        if (!typeof isLog == 'boolean')
-            isLog = false
+        // if (!typeof isLog == 'boolean')
+        //     isLog = false
         
         this.setState({ 
-            logied: isLog,
+           // logied: isLog,
             mode: mode,
             session_id:session_id
         })
        
-        localStorage.setItem('logied', this.state.logied)
+        //localStorage.setItem('logied', this.state.logied)
         localStorage.setItem('mode', this.state.mode)
         localStorage.setItem('session_id', this.state.session_id)
         return (
@@ -59,11 +58,11 @@ export class Main extends React.Component
             }
         })
          this.setState({ 
-            logied: false,
+            //logied: false,
             mode: 0,
             session_id:''
          })
-         localStorage.setItem('logied', false)
+         //localStorage.setItem('logied', false)
          localStorage.setItem('mode', 0)
          localStorage.setItem('session_id', '')
         return (
@@ -98,17 +97,17 @@ export class Main extends React.Component
         console.log(this.state.mode)
         return(
             <main>
-            <Header updateLogied = {this.updateLogied} logied={this.state.logied} mode={this.state.mode }/>
+            <Header updateLogied = {this.updateLogied} mode={this.state.mode }/>
             <Switch>
                 <Route
                     exact 
                     path="/pupil"
-                    render={props => <PupilPage  mode={this.state.mode } logied={this.state.logied } {...props} />}
+                    render={props => <PupilPage  mode={this.state.mode }  {...props} />}
                 />
                  <Route
                     exact
                     path="/teacher"
-                    render={props => <TeacherPage  mode={this.state.mode } logied={this.state.logied } {...props} />}
+                    render={props => <TeacherPage  mode={this.state.mode } {...props} />}
                 />
                 <Route path="not_found" component={NotFound}/>
 
@@ -135,7 +134,7 @@ export class Main extends React.Component
                 <Route path='/test' render={ this.someTest} />
                 <Route
                     path="/login"
-                    render={props => <LoginForm updateLogied={this.updateLogied} logied={this.state.logied } mode={this.state.mode } {...props} />}
+                    render={props => <LoginForm updateLogied={this.updateLogied} mode={this.state.mode } {...props} />}
                 />
             </Switch>
         </main>

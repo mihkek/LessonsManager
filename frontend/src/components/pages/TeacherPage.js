@@ -12,7 +12,6 @@ export default class TeacherPage extends React.Component {
             <div>
                 <LessonsPage 
                     apiUrl="teacher" 
-                    logied={this.props.logied}
                     targetMode={Constants.ModeTeacher} 
                     mode={this.props.mode} 
                     isReadOnly={false}

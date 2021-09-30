@@ -38,18 +38,19 @@ import * as MenuConst from '../constants/Menu'
             <li><Link to={Routs.PUPIL.link}>{Routs.PUPIL.name}</Link></li>
           )
     }
+    getMenu(){
+        if(this.props.mode == AppConstants.ModeTeacher)
+            return MenuConst.TeacherMenu
+        if(this.props.mode == AppConstants.ModePupil)
+            return MenuConst.PupilMenu
+        return MenuConst.NotLoginMenu
+    }
         render() {
-           var currentMenu = MenuConst.NotLoginMenu
-           if(this.props.logied){
-               if(this.props.mode == AppConstants.ModeTeacher)
-                    currentMenu = MenuConst.TeacherMenu
-               if(this.props.mode == AppConstants.ModePupil)
-                    currentMenu = MenuConst.PupilMenu
-           }
+           var currentMenu = this.getMenu()
            return(
             <header>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                    <AppNavBar BrandText="Happy english)" BrandLink="#" Menu={currentMenu} />
+                    <AppNavBar BrandText="Happy english)" BrandLink="#" Menu={currentMenu} mode={this.props.mode} />
                 </nav>
                 </header>
             )

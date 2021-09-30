@@ -4,6 +4,7 @@ import {Redirect} from "react-router-dom"
 import { LessonList } from '../elements/LessonList';
 import axios from 'axios';
 import * as UrlConstructor from '../../../functions/UrlConstructor'
+import * as APPMODE from '../../../constants/AppConstants'
  
 export default class LessonsPage extends React.Component {
     /* 
@@ -45,11 +46,8 @@ export default class LessonsPage extends React.Component {
 
     render(){
         console.log("ReadOnly - "+this.props.isReadOnly)
-        if(!this.props.logied)
+        if((this.props.mode == APPMODE.ModeGuest)||(this.props.mode != this.props.targetMode))
             return (<Redirect to='/'/>)
-        
-        if(this.props.mode != this.props.targetMode)
-            return(<Redirect to='/'/>)
         return(
             <div>
                 <h1>Study managment</h1>

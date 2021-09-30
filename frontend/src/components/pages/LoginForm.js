@@ -20,7 +20,7 @@ export class LoginForm extends React.Component {
       return {
         login: '', 
         password: '',
-        mode: '2', 
+        mode: 0, 
         logied: false,
         message: '',
         submit: false
@@ -41,6 +41,7 @@ export class LoginForm extends React.Component {
           this.setState({
             submit: true    
           });
+          console.log(this.state)
             axios({
                 method: 'post', // THERE GOES THE METHOD
                 url: 'access-control/login', // THERE GOES THE URL
@@ -54,10 +55,13 @@ export class LoginForm extends React.Component {
             })
               .then(response => {
                 this.setState({
-                    logied: response.data.logied,
-                    message: response.data.message
-                  });
-                  this.props.updateLogied(response.data.logied,response.data.mode, response.data.session_id)
+                  logied: response.data.logied,
+                  message: response.data.message
+                });
+                console.log(response.data)
+                if(response.data.logied){
+                      this.props.updateLogied(response.data.logied,response.data.mode, response.data.session_id)
+                }
               })
               // .catch(() => {
               //   const propName = "message"
@@ -71,6 +75,10 @@ export class LoginForm extends React.Component {
   
     render() {
       const options = [
+        {
+          value: 0,
+          text: "<Who are you?>"
+        },
         {
           value: 1,
           text: "Pupil"
@@ -91,13 +99,15 @@ export class LoginForm extends React.Component {
           data:  <SelectFieldWithLabel label="Mode" name="mode" value={this.state.mode} onChange={this.handleInputChange} options={options} />
         }
       ]
-      console.log("Form logied - "+ this.state.logied)
+      var message = ""
+      if((this.state.submit) && (!this.state.logied)){
+        message = <h3 className="form-error-message">Error: {this.state.message}</h3>
+      }
       return (
         <div>
-            { this.state.submit && !this.state.logied && <h1>Error: {this.state.message}</h1>}
             { this.state.logied && <Redirect to='/'/>}
             { this.props.logied && <Redirect to='/'/>}
-            <SimpleForm fields={fields} onSubmit={this.handleSubmit} buttonText="Sing in" hasBack={false}/>
+            <SimpleForm message={message} fields={fields} onSubmit={this.handleSubmit} buttonText="Sing in" hasBack={false}/>
         </div>
         
       );

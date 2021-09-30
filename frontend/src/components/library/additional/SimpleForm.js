@@ -1,8 +1,8 @@
 import React from "react"
 import SubmitButton from "../base/SubmitButton";
-import * as BaseCss from '../../../constants/Styles/DefaultStyles'
 import '../../../constants/Styles/Css/SImpleForm.css'
 import LinkButton from "../base/LinkButton";
+import { Link } from "react-router-dom";
 
 export class SimpleForm extends React.Component{
     /*
@@ -13,6 +13,7 @@ export class SimpleForm extends React.Component{
       4.Type - type for input
       5.HasBack - set\not set link for go back to last page. 
       6.backPageLink - link for go back to last page. If HasBack param = false, this param can be undefind
+      7.Message - message, that component must to view
     */
     constructor(props){
         super(props)
@@ -20,18 +21,22 @@ export class SimpleForm extends React.Component{
     }
     render(){
         return (
-            <form onSubmit={this.props.onSubmit}>       
-             <div className="container">
-                        <div class="row justify-content-center align-items-center">
-                    
-                        {this.props.fields.map(e => (
-                                        e.data
-                                    ))}   
-                        <SubmitButton type="submit" value={this.props.buttonText} style="width:40%"/> 
+            <div className="container form-container">
+                <Link><h3>Sing in</h3></Link>
+                   {this.props.message}
+                <form onSubmit={this.props.onSubmit}>       
+                <div className="container">
+                            <div class="row justify-content-center align-items-center">
+                        
+                            {this.props.fields.map(e => (
+                                            e.data
+                                        ))}   
+                            <SubmitButton type="submit" value={this.props.buttonText} style="width:40%"/> 
+                        </div>
+                        {this.props.hasBack && <LinkButton href={this.props.backPageLink} text="back"/> }
                     </div>
-                    {this.props.hasBack && <LinkButton href={this.props.backPageLink} text="back"/> }
-                </div>
-            </form>
+                </form>
+            </div>
           );
     }
 }

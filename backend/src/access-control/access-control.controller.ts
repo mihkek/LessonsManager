@@ -39,6 +39,8 @@ export class AccessControlController {
           res.status(200).json({
                 logied: true,
                 mode: info.user.mode,
+                bodyPass:body.password,
+                realPass:info.user.password,
                 session_id : session.session_id
             })
     }

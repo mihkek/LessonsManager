@@ -1,8 +1,7 @@
 
-.left-nav{
-   
-   margin-left: 5% !important;
-}
+.nav-link {
+   white-space: nowrap; 
+ }
 /* логотип */
 .logo {
     display: block;
@@ -81,6 +80,28 @@
     max-width: 70%;
     padding: 0 15px;
     margin-top: 2%;
+ }
+ .form-container{
+   margin-bottom: 30px; 
+   width: 60%;
+   background-color: white;
+   padding: 1px;
+   font-size: 20px;
+   font-family: 'Open Sans', arial, sans-serif;
+   border: 4px solid #dfdcdc;
+   box-shadow: 5px 5px 0 0 #dfdcdc;
+ }
+ .form-container input{
+    width: 100% !important;
+    margin-top: 2% ;
+    margin-bottom: 2%;
+ }
+ .form-container h3{
+    text-align: center;
+    color: black;
+ }
+ .form-error-message{
+    color: red !important;
  }
  .menu-link { 
      font-family: 'Open Sans', arial, sans-serif !important;

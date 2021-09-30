@@ -16,7 +16,7 @@ export class AppNavBar extends React.Component{
                         - href
                         - dropdownList: Text, Href
         5. Other - other components of a NavBar. It can contains a search-form, some images, and others
-        6. UserMode - current access model of the application
+        6. Mode - current access model of the application
         List of input params would take new elements in the future
     */
     constructor(props){
@@ -61,7 +61,7 @@ export class AppNavBar extends React.Component{
                             </Navbar.Collapse>
                            
                           
-                                {this.props.userMode != APPMODE.ModeGuest &&      
+                                {this.props.mode != APPMODE.ModeGuest &&      
                                     <React.Fragment>                   
                                         <NavDropdown title="UserName"className="left-nav">
                                             <NavDropdown.Item href="">
