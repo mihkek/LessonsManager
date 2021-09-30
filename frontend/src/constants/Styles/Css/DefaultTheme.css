@@ -1,9 +1,13 @@
 
+.left-nav{
+   
+   margin-left: 5% !important;
+}
 /* логотип */
 .logo {
     display: block;
     float: left;
-    margin-left: 10%;
+    margin-left: 5%;
  }
  .logo span {
     color: white;
@@ -117,7 +121,12 @@
  } 
 .hint{
     margin-right: 10px;
-    color: black;
+    color: black !important;
+    font-family: 'Open Sans', arial, sans-serif;
+    font-size: 14px;
+}
+.hint-small{
+   font-size: 5px;
 }
  .profile-image{
     width: 5%;

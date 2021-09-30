@@ -4,6 +4,7 @@ import { NavLink, Navbar,NavDropdown,Nav, Container, Form, FormControl, Button }
 import { Link } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import profileLink from './profileLink.png'
+import * as APPMODE from '../../../constants/AppConstants' 
 
 export class AppNavBar extends React.Component{
     /*Input
@@ -15,6 +16,7 @@ export class AppNavBar extends React.Component{
                         - href
                         - dropdownList: Text, Href
         5. Other - other components of a NavBar. It can contains a search-form, some images, and others
+        6. UserMode - current access model of the application
         List of input params would take new elements in the future
     */
     constructor(props){
@@ -56,10 +58,21 @@ export class AppNavBar extends React.Component{
                                         ))}     
                               
                                 </Nav>
-    
-    
                             </Navbar.Collapse>
-                            <p className = "hint">My account</p> <Image  className = "profile-image" src={profileLink}/>
+                           
+                          
+                                {this.props.userMode != APPMODE.ModeGuest &&      
+                                    <React.Fragment>                   
+                                        <NavDropdown title="UserName"className="left-nav">
+                                            <NavDropdown.Item href="">
+                                                <Link to="/profile"><p className = "hint">My account</p></Link> 
+                                                <Link to="/logout"><p className = "hint">Logout</p></Link> 
+                                            </NavDropdown.Item>
+                                        </NavDropdown>
+                                        <Image  className = "profile-image" src={profileLink}/>
+                                    </React.Fragment>
+                                }
+                           
                         </Navbar>
                      
                         <br />
