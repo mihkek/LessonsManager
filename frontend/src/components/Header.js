@@ -48,7 +48,7 @@ import * as MenuConst from '../constants/Menu'
         render() {
            var currentMenu = this.getMenu()
            return(
-            <header>
+            <header className="wrapper wrapper-white bg-light">
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <AppNavBar BrandText="Happy english)" BrandLink="#" Menu={currentMenu} mode={this.props.mode} />
                 </nav>

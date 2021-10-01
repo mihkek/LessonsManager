@@ -45,4 +45,11 @@ export class TeacherController {
                  message:edit.message
              })
     }
+    @Get("myPupils")
+    async getPupils(@Res() res,@Req() Req){
+        var data = await this.teacherService.getPupils()
+        if(!data.state){
+            
+        }
+    }
 }

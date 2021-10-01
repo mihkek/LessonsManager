@@ -1,5 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import * as CiteMode from '../../../constants/AppConstants'
+import chat_link_icon from '../../../constants/Styles/Images/chat_link_icon.png'
+import person_defaultImage from '../../../constants/Styles/Images/person_defaultImage.png'
 
 export class ElemOfLessonList extends React.Component{
     /*
@@ -12,11 +15,22 @@ export class ElemOfLessonList extends React.Component{
     }
     render(){
         return(
-             <div>
-                 <h1>{this.props.name}</h1>
-                 <h4>{this.props.task}</h4>
-                 <a href={this.props.href}>View lesson</a>
-                {!this.props.isReadOnly && <a href={this.props.hrefToDelete}>Delete lesson</a>}
+             <div className="lesson">
+            <div className="lesson-content">
+                  <a href=""><img  className="profile-user-image" src={person_defaultImage}/></a>
+            </div>
+            <div className="pupil-info"><a href="">Pupil - Bitch from Penza</a>
+              <a href="@"><img  class="chat-link" src={chat_link_icon}/></a>
+          
+          </div>
+          <h2 className="lesson-title">{this.props.name}</h2>
+              <p>{this.props.task}</p>
+              <div className="lesson-footer">
+                <Link className="more-link" to={this.props.href}>View lesson</Link> 
+                {!this.props.isReadOnly && <Link className="more-link" to={this.props.hrefToDelete}>Delete lesson</Link>}
+            </div>
+                
+               
              </div>
         )
     }

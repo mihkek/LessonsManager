@@ -49,8 +49,8 @@ export default class LessonsPage extends React.Component {
         if((this.props.mode == APPMODE.ModeGuest)||(this.props.mode != this.props.targetMode))
             return (<Redirect to='/'/>)
         return(
-            <div>
-                <h1>Study managment</h1>
+            <div className="lessons-list">
+                <h1 className="lesson-page-header">Study managment</h1>
                 <LessonList data={this.state.data} pageRoute={this.props.pageRoute} isReadOnly={this.props.isReadOnly}/>
                 
             </div>

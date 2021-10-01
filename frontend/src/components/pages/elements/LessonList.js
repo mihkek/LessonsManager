@@ -18,7 +18,7 @@ export class LessonList extends React.Component{
     }
     render(){
         return(
-            <div>
+           
                  <React.Fragment>
                         {this.props.data.map(e=>(
                         
@@ -30,7 +30,7 @@ export class LessonList extends React.Component{
                         
                         ))}
                   </React.Fragment>
-            </div>
+     
         )
     }
 }

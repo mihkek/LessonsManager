@@ -61,15 +61,16 @@ export class LoginForm extends React.Component {
                 console.log(response.data)
                 if(response.data.logied){
                       this.props.updateLogied(response.data.logied,response.data.mode, response.data.session_id)
+                      localStorage.setItem('currentUserName', this.state.login)
                 }
               })
-              // .catch(() => {
-              //   const propName = "message"
-              //   this.setState({
-              //     logied: false,
-              //     [propName]: "Server error"
-              //   });
-              // })
+              .catch(() => {
+                const propName = "message"
+                this.setState({
+                  logied: false,
+                  message: "Server error"
+                });
+              })
        event.preventDefault();
     }
   

@@ -7,6 +7,10 @@ import * as Links from '../constants/Routs'
 import axios from 'axios'
 import {LessonView} from './pages/elements/LessonView' 
 import { NotFound } from './library/additional/NotFound404';
+import { Footer } from './library/base/Footer';
+import { BaseWidget } from './pages/widgets/BaseWidget';
+
+import { ModalFooter } from 'react-bootstrap';
 
 
 import {
@@ -21,7 +25,6 @@ export class Main extends React.Component
 {
     constructor(props) {
         super(props);
-       // const logg  = localStorage.getItem('logied') == "true" ? true : false
         const mod = parseInt(localStorage.getItem('mode')) || 0
         const session_id = localStorage.getItem('session_id')
         this.state = {
@@ -31,16 +34,11 @@ export class Main extends React.Component
         console.log(this.state)
     }
     updateLogied = (isLog, mode,session_id ) => { 
-        // if (!typeof isLog == 'boolean')
-        //     isLog = false
         
         this.setState({ 
-           // logied: isLog,
             mode: mode,
             session_id:session_id
         })
-       
-        //localStorage.setItem('logied', this.state.logied)
         localStorage.setItem('mode', this.state.mode)
         localStorage.setItem('session_id', this.state.session_id)
         return (
@@ -58,13 +56,12 @@ export class Main extends React.Component
             }
         })
          this.setState({ 
-            //logied: false,
             mode: 0,
             session_id:''
          })
-         //localStorage.setItem('logied', false)
          localStorage.setItem('mode', 0)
          localStorage.setItem('session_id', '')
+         localStorage.setItem('currentUserName', '')
         return (
             <Redirect to={Links.HOME.link}/>
         )
@@ -96,8 +93,10 @@ export class Main extends React.Component
         console.log("Session - "+this.state.session_id)
         console.log(this.state.mode)
         return(
-            <main>
+            <main >  
+                <body>
             <Header updateLogied = {this.updateLogied} mode={this.state.mode }/>
+            <div className="wrapper">
             <Switch>
                 <Route
                     exact 
@@ -137,6 +136,12 @@ export class Main extends React.Component
                     render={props => <LoginForm updateLogied={this.updateLogied} mode={this.state.mode } {...props} />}
                 />
             </Switch>
+            </div>
+          <Footer/>
+     
+            
+           
+      </body>
         </main>
         )
     }

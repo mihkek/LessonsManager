@@ -6,6 +6,8 @@ import SubmitButton from '../../library/base/SubmitButton'
 import axios from 'axios';
 import { Redirect } from 'react-router';
 import * as UrlConstructor from '../../../functions/UrlConstructor'
+import arrow_back from '../../../constants/Styles/Images/arrow_back.png'
+import { Link } from 'react-router-dom';
 
 export class LessonView extends React.Component{
     /*
@@ -95,16 +97,47 @@ export class LessonView extends React.Component{
     render(){
         return(
             <React.Fragment>
-                {this.state.submitStatus != undefined && this.state.submitStatus == false && 
-                        <h2>Error - {this.state.error}</h2>}
-                {this.state.submitStatus == true && <Redirect to={this.props.pageForGoBack}/>}
-                <form onSubmit={this.handleDataSave}>
-                    <InputWithLabel name="lessonName" label="Lesson name" type="text"  isReadOnly={this.props.isReadOnly} value={this.state.lessonName} onChange={this.handleInputChange}/>
-                    <InputWithLabel name="lessonTask" label="Tasks for lesson" isReadOnly={this.props.isReadOnly} type="text" value={this.state.lessonTask} onChange={this.handleInputChange}/>
-                    {!this.props.isReadOnly && <SubmitButton name="submit" text="save" value="Save"/>}
-                    <LinkButton href={this.props.pageForGoBack} text="Back"/>
-                </form>
+                  <div className="container  lesson-detail">
+                        <Link to= {this.props.pageForGoBack}><img class="arrow" src={arrow_back}/></Link>
+                            {this.state.submitStatus != undefined && this.state.submitStatus == false && 
+                                    <h2>Error - {this.state.error}</h2>}
+                            {this.state.submitStatus == true && <Redirect to={this.props.pageForGoBack}/>}
+                            <form onSubmit={this.handleDataSave}>
+                            
+                            <div class="row justify-content-center align-items-center">
+                                <InputWithLabel name="lessonName" label="Lesson name" type="text"  isReadOnly={this.props.isReadOnly} value={this.state.lessonName} onChange={this.handleInputChange}/>
+                                <InputWithLabel name="lessonTask" label="Tasks for lesson" isReadOnly={this.props.isReadOnly} type="text" value={this.state.lessonTask} onChange={this.handleInputChange}/>
+                                
+                                <div className="lesson-view-footer">
+                                    {!this.props.isReadOnly && <SubmitButton cssClass="action-button" name="submit" text="save" value="Save"/>}
+                                </div>
+                                
+                                </div>
+                            </form>
+                </div>
             </React.Fragment>
         )
     }
 }
+
+// return(
+//     <React.Fragment>
+//           <div className="lesson lesson-detail">
+//             <div className="container form-container form-container-notBorder">
+//                 <Link to= {this.props.pageForGoBack}><img class="arrow" src={arrow_back}/></Link>
+//                     {this.state.submitStatus != undefined && this.state.submitStatus == false && 
+//                             <h2>Error - {this.state.error}</h2>}
+//                     {this.state.submitStatus == true && <Redirect to={this.props.pageForGoBack}/>}
+//                     <form onSubmit={this.handleDataSave}>
+//                         <InputWithLabel name="lessonName" label="Lesson name" type="text"  isReadOnly={this.props.isReadOnly} value={this.state.lessonName} onChange={this.handleInputChange}/>
+//                         <InputWithLabel name="lessonTask" label="Tasks for lesson" isReadOnly={this.props.isReadOnly} type="text" value={this.state.lessonTask} onChange={this.handleInputChange}/>
+                        
+//                         <div className="lesson-view-footer">
+//                             {!this.props.isReadOnly && <SubmitButton cssClass="action-button" name="submit" text="save" value="Save"/>}
+//                             <LinkButton cssClass="action-button" href={this.props.pageForGoBack} text="Back"/>
+//                         </div>
+//                     </form>
+//                 </div>
+//         </div>
+//     </React.Fragment>
+// )

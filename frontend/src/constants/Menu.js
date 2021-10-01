@@ -9,7 +9,7 @@ export const NotLoginMenu = [
  },
  {
     href : "/login",
-    text : "Sing in"
+    text : "Sing in",
  },
 ]
 export const TeacherMenu = [
@@ -17,14 +17,19 @@ export const TeacherMenu = [
         href : "/",
         text : "Home"
      },
-     {
-       href : "/about",
-       text : "About"
-    },
+    
     {
         href : "/teacher",
-        text : "Teacher"
+        text : "Study proccess"
     },
+    {
+        href : "/my_pupils",
+        text : "My pupils"
+    },
+    {
+        href : "/about",
+        text : "About"
+     },
     {
         href : "/logout",
         text : "Logout"
