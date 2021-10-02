@@ -3,16 +3,23 @@ import { Link } from 'react-router-dom';
 import * as CiteMode from '../../../constants/AppConstants'
 import chat_link_icon from '../../../constants/Styles/Images/chat_link_icon.png'
 import person_defaultImage from '../../../constants/Styles/Images/person_defaultImage.png'
+import {deleteLesson} from '../../../functions/DeleteLesson'
 
 export class ElemOfLessonList extends React.Component{
     /*
       Props:
       1.IsReadOnly - if this param is false, it means that you cannot editData
       2.ApiUrl - url, that component and his childs will use for API-requests
+      3.Id - lesson id
     */
     constructor(props){
         super(props)
+        this.delete = this.delete.bind(this)
     }
+    delete(){
+        var res = deleteLesson(this.props.id, "teacher")
+        console.log(res)
+    }   
     render(){
         return(
              <div className="lesson">
@@ -27,7 +34,7 @@ export class ElemOfLessonList extends React.Component{
               <p>{this.props.task}</p>
               <div className="lesson-footer">
                 <Link className="more-link" to={this.props.href}>View lesson</Link> 
-                {!this.props.isReadOnly && <Link className="more-link" to={this.props.hrefToDelete}>Delete lesson</Link>}
+                {!this.props.isReadOnly && <button onClick={this.delete} className="more-link" >Delete lesson</button>}
             </div>
                 
                

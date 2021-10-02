@@ -20,6 +20,7 @@ export class LessonView extends React.Component{
         5. ApiServicePath - api path for getting data
         6. HrefForAdd - route path for add new lesson()
         7. HRef
+        8. ApiAction - action that will run after the button was click
 
        Params in the route:
         1. LessonId - an unique lesson ID, that using for receiving data from api
@@ -36,6 +37,9 @@ export class LessonView extends React.Component{
         this.getLessonDataFromServer()
     }
     getLessonDataFromServer(){
+        if(this.props.match.params.id == undefined)
+            return
+
         var url = UrlConstructor.constructUrl(this.props.apiUrl, ["viewLesson/",this.props.match.params.id ])
         var session_id = localStorage.getItem('session_id')
         axios({
@@ -58,7 +62,7 @@ export class LessonView extends React.Component{
           })
     }
     handleDataSave(event){
-        var url = UrlConstructor.constructUrl(this.props.apiUrl, ["changeLesson" ])
+        var url = UrlConstructor.constructUrl(this.props.apiUrl, [this.props.apiAction ])
         var session_id = localStorage.getItem('session_id')
         axios({
             method: 'post', 

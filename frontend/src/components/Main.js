@@ -118,6 +118,7 @@ export class Main extends React.Component
                                             pageForGoBack="/teacher" 
                                             apiUrl="/teacher"
                                             isReadOnly={false} 
+                                            apiAction="changeLesson"
                                             {...props} />}
                                 />
                                 <Route
@@ -128,6 +129,18 @@ export class Main extends React.Component
                                             apiUrl="/pupil"
                                             isReadOnly={true} 
                                             {...props} />}
+                                />
+                                <Route 
+                                    path="/teacher/addLesson"
+                                    render={props => 
+                                        <LessonView 
+                                        pageForGoBack="/teacher" 
+                                        apiUrl="/teacher"
+                                        apiAction="addLesson"
+                                        isReadOnly={false} 
+                                        {...props}
+                                        />
+                                    }
                                 />
                 <Route path='/logout' render={ this.logout} />
                 <Route path='/test' render={ this.someTest} />

@@ -26,6 +26,7 @@ export class LessonList extends React.Component{
                                     name={e.name} task={e.task} 
                                     isReadOnly = {this.props.isReadOnly}
                                     apiUrl = {this.props.apiUrl}
+                                    id={e.id}
                                     href={this.makeHrefForLesson("lesson", e.id)}/> 
                         
                         ))}

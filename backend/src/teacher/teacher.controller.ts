@@ -48,8 +48,31 @@ export class TeacherController {
     @Get("myPupils")
     async getPupils(@Res() res,@Req() Req){
         var data = await this.teacherService.getPupils()
+        console.log(JSON.stringify(data))
         if(!data.state){
-            
+            res.status(500)
+        }else{
+            res.status(200).json({
+                pupils:data.pupils
+            })
         }
+    }
+    @Post("deleteLesson")
+    async deleteLesson(@Res() res,@Req() req){
+        var del = await this.lessonsManagerService.deleteLesson({'id':req.body.id})
+        console.log("Delete lesson - "+del)
+        if(del.state){
+            res.status(200);
+        }else{
+            res.status(500)
+        }
+    }
+    @Post("addLesson")
+    async addLesson(@Res() res, @Req() req){
+        var add = await this.lessonsManagerService.addLesson({name:req.body.name, task:req.body.task})
+        res.status(200).json({
+            status:add.state,
+            message:add.message
+        })
     }
 }

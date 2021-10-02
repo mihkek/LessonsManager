@@ -11,7 +11,7 @@ export default class TeacherPage extends React.Component {
     render(){
         return(
             <React.Fragment>
-                <ListOfPupilsWidget/>
+                <ListOfPupilsWidget apiUrl="teacher" title="My pupils"/>
                 <LessonsPage 
                     apiUrl="teacher" 
                     targetMode={Constants.ModeTeacher} 

@@ -241,6 +241,10 @@
     letter-spacing: 0.1em;
     white-space: nowrap;
  }
+ .more-link:hover{
+    color: blue;
+    /* width: ; */
+ }
  .more-link:after {
     content: '';
     display: block;
@@ -319,7 +323,6 @@
  }
 
  .action-button {
-   /* position: relative; */
    float: left;
    display: inline;
    font-size: 15px;
@@ -350,6 +353,10 @@
    margin-top: 1% ;
    background-color: white;
    width: 80%;
+   margin-bottom: 2%;
+}
+.lesson-detail input{
+   margin-bottom: 1%;
 }
 .lesson-view-footer{
    float: left ;
