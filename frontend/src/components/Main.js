@@ -11,8 +11,7 @@ import { Footer } from './library/base/Footer';
 import { BaseWidget } from './pages/widgets/BaseWidget';
 
 import { ModalFooter } from 'react-bootstrap';
-
-
+import {ConfirmModal} from './library/additional/ConfirmWindow'
 import {
     Route,
     Switch,
@@ -97,6 +96,7 @@ export class Main extends React.Component
                 <body>
             <Header updateLogied = {this.updateLogied} mode={this.state.mode }/>
             <div className="wrapper">
+        
             <Switch>
                 <Route
                     exact 

@@ -1,10 +1,15 @@
 import React from 'react';
-import * as Constants from '../../../constants/AppConstants'
 import {Redirect} from "react-router-dom"
 import { LessonList } from '../elements/LessonList';
 import axios from 'axios';
 import * as UrlConstructor from '../../../functions/UrlConstructor'
 import * as APPMODE from '../../../constants/AppConstants'
+import { ConfirmWindow } from '../../library/additional/ConfirmWindow';
+import {deleteLesson} from '../../../functions/DeleteLesson'
+import { Link } from 'react-router-dom';
+import addLink from '../../../constants/Styles/Images/addLink.png'
+
+
  
 export default class LessonsPage extends React.Component {
     /* 
@@ -20,9 +25,15 @@ export default class LessonsPage extends React.Component {
         super(props)
         this.state = {
             data : [],
-            badResponse:false
+            badResponse:false,
+            isModalVisible: false,
+            isModal : false,
+            idLessonWaitingConfirm: -1
         }
         this.getData = this.getData.bind(this)
+        this.deleteData = this.deleteData.bind(this)
+        this.showConfirm = this.showConfirm.bind(this)
+        this.confirmAction = this.confirmAction.bind(this)
         this.getData()
     }
     getData(){
@@ -43,15 +54,56 @@ export default class LessonsPage extends React.Component {
               });
           })
     }
+    showConfirm(){
+        this.setState({
+            isModal:true
+        })
+    }
+    confirmAction(res){
+        this.setState({
+            isModal:false
+        })
+        if(!res){
+           
+            return
+        }
+        else{
+            deleteLesson(this.state.idLessonWaitingConfirm, this.props.apiUrl)
+            this.setState({
+                idLessonWaitingConfirm:-1,
+            })
+            this.getData()
+        }
+        
+    }
+    deleteData(id){
+        this.showConfirm()
+        this.setState({
+            idLessonWaitingConfirm : id
+        })
+    }
+  
 
     render(){
+      
+
         console.log("ReadOnly - "+this.props.isReadOnly)
         if((this.props.mode == APPMODE.ModeGuest)||(this.props.mode != this.props.targetMode))
             return (<Redirect to='/'/>)
         return(
             <div className="lessons-list">
-                <h1 className="lesson-page-header">Study managment</h1>
-                <LessonList data={this.state.data} pageRoute={this.props.pageRoute} isReadOnly={this.props.isReadOnly}/>
+                
+                <ConfirmWindow
+                            visible={this.state.isModal}
+                            title='Do you want to delete lesson?'
+                            content={<p>It will delete data about this lesson from data base.</p>}
+                            action = {this.confirmAction}
+                        />
+                <h1 className="lesson-page-header">English lessons with my pupils</h1>
+                {/* <a href=""><img  className="action-button " src={addLink}/></a> */}
+                {!this.props.isReadOnly &&   <Link to="/teacher/addLesson"><img className="action-button small" src={addLink}/></Link>}
+              
+                <LessonList data={this.state.data} pageRoute={this.props.pageRoute} deleteAction={this.deleteData} isReadOnly={this.props.isReadOnly}/>
                 
             </div>
         )

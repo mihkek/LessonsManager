@@ -2,6 +2,10 @@ import React from 'react';
 import { ElemOfLessonList } from './ElemOfLessonList';
 import { LessonView } from './LessonView';
 import { Route,Link } from 'react-router-dom';
+import { Modal } from 'react-bootstrap';
+import { ConfirmWindow } from '../../library/additional/ConfirmWindow';
+import {deleteLesson} from '../../../functions/DeleteLesson'
+
 
 export class LessonList extends React.Component{
     /*
@@ -12,7 +16,11 @@ export class LessonList extends React.Component{
     */
     constructor(props){
         super(props)
+        this.state = {
+            isModal : false
+        }
     }
+
     makeHrefForLesson = (mainLink, idLesson) => {
         return this.props.pageRoute+"/"+ mainLink+"/"+idLesson    
     }
@@ -20,6 +28,8 @@ export class LessonList extends React.Component{
         return(
            
                  <React.Fragment>
+                   
+             
                         {this.props.data.map(e=>(
                         
                                 <ElemOfLessonList 
@@ -27,6 +37,7 @@ export class LessonList extends React.Component{
                                     isReadOnly = {this.props.isReadOnly}
                                     apiUrl = {this.props.apiUrl}
                                     id={e.id}
+                                    deleteAction = {this.props.deleteAction}
                                     href={this.makeHrefForLesson("lesson", e.id)}/> 
                         
                         ))}

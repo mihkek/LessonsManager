@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import * as CiteMode from '../../../constants/AppConstants'
 import chat_link_icon from '../../../constants/Styles/Images/chat_link_icon.png'
 import person_defaultImage from '../../../constants/Styles/Images/person_defaultImage.png'
-import {deleteLesson} from '../../../functions/DeleteLesson'
 
 export class ElemOfLessonList extends React.Component{
     /*
@@ -17,8 +15,7 @@ export class ElemOfLessonList extends React.Component{
         this.delete = this.delete.bind(this)
     }
     delete(){
-        var res = deleteLesson(this.props.id, "teacher")
-        console.log(res)
+          this.props.deleteAction(this.props.id)
     }   
     render(){
         return(
