@@ -68,7 +68,7 @@ export class AppNavBar extends React.Component{
                                     <React.Fragment>                   
                                         <NavDropdown title="User" className="left-nav">
                                             <NavDropdown.Item href="">
-                                                <Link to="/profile"><p className = "hint">My account</p></Link> 
+                                                <Link to="/profile"><p className = "hint">My profile</p></Link> 
                                             </NavDropdown.Item>
                                             <NavDropdown.Item href="">
                                                 <Link to="/logout"><p className = "hint">Logout</p></Link> 

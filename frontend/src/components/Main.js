@@ -17,6 +17,7 @@ import {
     Switch,
     Redirect,
   } from "react-router-dom"
+import { MyProfile } from './pages/MyProfile';
       
 
 const MyContext = React.createContext(undefined);
@@ -28,9 +29,10 @@ export class Main extends React.Component
         const session_id = localStorage.getItem('session_id')
         this.state = {
           mode: mod,
-          session_id:session_id
+          session_id:session_id,
+          isLoad:false
         };
-        console.log(this.state)
+        this.setLoadingState = this.setLoadingState.bind(this)
     }
     updateLogied = (isLog, mode,session_id ) => { 
         
@@ -88,6 +90,17 @@ export class Main extends React.Component
           </p>
         );
       }
+    getMainDivClass(){
+        var base = "wrapper" ;
+        if(this.state.isLoad) base += " wrapper-load" 
+        return base
+    }
+
+    setLoadingState(isLoad=false){
+        this.setState({
+            isLoad : isLoad
+        })
+    }
     render(){
         console.log("Session - "+this.state.session_id)
         console.log(this.state.mode)
@@ -95,20 +108,23 @@ export class Main extends React.Component
             <main >  
                 <body>
             <Header updateLogied = {this.updateLogied} mode={this.state.mode }/>
-            <div className="wrapper">
-        
+            <div className={this.getMainDivClass()}>
             <Switch>
                 <Route
                     exact 
                     path="/pupil"
-                    render={props => <PupilPage  mode={this.state.mode }  {...props} />}
+                    render={props => <PupilPage  mode={this.state.mode} setLoadingState={this.setLoadingState}   {...props} />}
                 />
                  <Route
                     exact
                     path="/teacher"
-                    render={props => <TeacherPage  mode={this.state.mode } {...props} />}
+                    render={props => <TeacherPage  mode={this.state.mode } setLoadingState={this.setLoadingState} {...props} />}
                 />
-                <Route path="not_found" component={NotFound}/>
+                <Route 
+                    path="/profile"
+                   render={props => <MyProfile />}
+                />
+                <Route path="/not_found" component={NotFound}/>
 
 
                                 <Route

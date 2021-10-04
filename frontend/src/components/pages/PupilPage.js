@@ -9,7 +9,11 @@ export default class PupilPage extends React.Component {
     constructor(props){
         super(props)
     }
+    componentDidMount(){
+        //this.props.setLoadingState(true)
+    }
     render(){
+        
         return(
             <div>
                 <LessonsPage 

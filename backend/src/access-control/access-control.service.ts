@@ -20,6 +20,19 @@ export class AccessControlService {
             } 
        }
    }
+   async getFullUserInfo(id){
+     var user = await User.findOne({'id':id})
+     if(user==undefined){
+       return{
+         found:false
+       }
+     }else{
+       return{
+         found:true,
+         user:user
+       }
+     }
+   }
    async registerUser(params){
        var user = new User()
        user.login = params.login
@@ -95,7 +108,7 @@ export class AccessControlService {
      return bcrypt.genSaltSync(10);
    }
    private  hashPassword(password, salt){
-       return  bcrypt.hashSync(password, salt);
+      return  bcrypt.hashSync(password, salt);
    }
 }
 

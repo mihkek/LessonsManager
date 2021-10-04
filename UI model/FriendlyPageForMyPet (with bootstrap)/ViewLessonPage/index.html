@@ -11,7 +11,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script> -->
   <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
 </head>
-<body>
+<body >
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand logo"  href="">
@@ -54,9 +54,14 @@
         </div>
       </nav>
 
-<div class="wrapper"> 
+
+
+
+   
+<div class="wrapper wrapper-block"> 
    <div class="container">
-     
+    <div class="loader">
+    </div>
       <div class="lesson lesson-detail">
 
         <img class="arrow" src="./arrow_back.png">
@@ -74,6 +79,7 @@
 
    </div>
 </div>
+
       <!-- <footer>
         <div class="container">
           <div class="footer-col"><span>English lab © 2021</span></div>
@@ -85,3 +91,16 @@
         </div>
       </footer> -->
 </body>
+<script type="text/javascript">
+
+	window.onload = function() {
+
+		setTimeout(function() {
+
+			document.getElementById("preloader_malc").style.display = "none";
+
+		}, 400);
+
+	};
+
+</script>

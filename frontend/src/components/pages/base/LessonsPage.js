@@ -28,7 +28,8 @@ export default class LessonsPage extends React.Component {
             badResponse:false,
             isModalVisible: false,
             isModal : false,
-            idLessonWaitingConfirm: -1
+            idLessonWaitingConfirm: -1,
+            isLoad: true
         }
         this.getData = this.getData.bind(this)
         this.deleteData = this.deleteData.bind(this)
@@ -39,6 +40,9 @@ export default class LessonsPage extends React.Component {
     getData(){
         var url = UrlConstructor.constructUrl(this.props.apiUrl, ["lessons"]) 
         var session_id = localStorage.getItem('session_id')  
+        this.setState({
+            isLoad:true
+        })
         axios({
             method: 'get', 
             url: url, 
@@ -51,6 +55,7 @@ export default class LessonsPage extends React.Component {
             console.log(response.status)
             this.setState({
                 data: response.data.data,
+                isLoad: false
               });
           })
     }
@@ -82,17 +87,22 @@ export default class LessonsPage extends React.Component {
             idLessonWaitingConfirm : id
         })
     }
-  
-
     render(){
       
+        var divClass = "lessons-list"
+        if(this.state.isLoad) divClass += " loading"
 
         console.log("ReadOnly - "+this.props.isReadOnly)
         if((this.props.mode == APPMODE.ModeGuest)||(this.props.mode != this.props.targetMode))
             return (<Redirect to='/'/>)
         return(
-            <div className="lessons-list">
-                
+            
+           
+            <div className={divClass}>
+                {this.state.isLoad &&  
+                <div class="loader">
+                     </div>}
+
                 <ConfirmWindow
                             visible={this.state.isModal}
                             title='Do you want to delete lesson?'
@@ -106,6 +116,7 @@ export default class LessonsPage extends React.Component {
                 <LessonList data={this.state.data} pageRoute={this.props.pageRoute} deleteAction={this.deleteData} isReadOnly={this.props.isReadOnly}/>
                 
             </div>
+           
         )
     }
 }

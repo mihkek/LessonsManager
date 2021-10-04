@@ -72,6 +72,22 @@ export class AccessControlController {
         }
 
     } 
+    @Post("profile")
+    async getProfile(@Res() res,@Req() req){
+      console.log("seesonf - " +req.session_id)
+        const session = await this.accessControlService.getSessionBySession_id(req.session_id)
+        console.log(session)
+        const user =  await this.accessControlService.getFullUserInfo(session.session.user.id)
+        console.log(user)
+        if(!user.found){
+          res.status(500)
+        }else{
+          res.status(200).json({
+             user:user.user
+          })
+        }
+
+    }
     @Get("someTest/:p")
     async testHash(@Param() p){
         //console.log(this.accessControlService.hashPassword(JSON.stringify(p), this.accessControlService.generateSalt()))

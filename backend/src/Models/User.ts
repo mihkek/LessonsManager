@@ -22,6 +22,23 @@ export class User extends BaseEntity
 
     @OneToMany( type => SessinsStore , session => session.user)
     sessions: SessinsStore[];
+
+
+    @Column({default:null})
+    fullname: string
+
+    @Column({default:null})
+    aboutme:string
+
+    @Column({default:null})
+    email:string
+
+    @Column({default:null})
+    phone:string
+
+    @Column({default:null})
+    addres:string
+
     
     constructor(){
       super()

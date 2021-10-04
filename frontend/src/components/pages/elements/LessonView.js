@@ -29,7 +29,8 @@ export class LessonView extends React.Component{
         super(props)
         this.state ={
             lessonName:'',
-            lessonTask:''
+            lessonTask:'',
+            isLoad: true
         }
         this.handleInputChange = this.handleInputChange.bind(this)
         this.getLessonDataFromServer = this.getLessonDataFromServer.bind(this)
@@ -42,6 +43,9 @@ export class LessonView extends React.Component{
 
         var url = UrlConstructor.constructUrl(this.props.apiUrl, ["viewLesson/",this.props.match.params.id ])
         var session_id = localStorage.getItem('session_id')
+        this.setState({
+            isLoad:true
+        })
         axios({
             method: 'get', 
             url: url, 
@@ -57,7 +61,8 @@ export class LessonView extends React.Component{
             console.log("Taked -" + response.data.lesson.name)
             this.setState({
                 lessonName: response.data.lesson.name,
-                lessonTask: response.data.lesson.task
+                lessonTask: response.data.lesson.task,
+                isLoad: false
               });
           })
     }
@@ -99,9 +104,15 @@ export class LessonView extends React.Component{
           });
     }
     render(){
+        var divClass = "container  lesson-detail"
+        if(this.state.isLoad) divClass += " loading"
+
         return(
             <React.Fragment>
-                  <div className="container  lesson-detail">
+                  <div className={divClass}>
+                  {this.state.isLoad &&  
+                        <div class="loader">
+                            </div>}
                         <Link to= {this.props.pageForGoBack}><img class="arrow" src={arrow_back}/></Link>
                             {this.state.submitStatus != undefined && this.state.submitStatus == false && 
                                     <h2>Error - {this.state.error}</h2>}
