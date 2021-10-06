@@ -33,6 +33,23 @@ export class AccessControlService {
        }
      }
    }
+   async saveNewUserInfo(userData, userId){
+     var user = await User.findOne({id:userId})
+     if(user == undefined){
+       return{
+         found:false
+       }
+     }
+     user.login = userData.login
+     user.phone = userData.phone
+     user.aboutme = userData.aboutme
+     user.addres = userData.addres
+     user.email = userData.email
+     user.fullname = userData.fullname
+     console.log(user)
+     await user.save()
+     
+   }
    async registerUser(params){
        var user = new User()
        user.login = params.login

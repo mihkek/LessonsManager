@@ -8,6 +8,7 @@ import { ConfirmWindow } from '../../library/additional/ConfirmWindow';
 import {deleteLesson} from '../../../functions/DeleteLesson'
 import { Link } from 'react-router-dom';
 import addLink from '../../../constants/Styles/Images/addLink.png'
+import {CONFIRM_MODE}  from '../../library/additional/ConfirmWindow';
 
 
  
@@ -108,6 +109,7 @@ export default class LessonsPage extends React.Component {
                             title='Do you want to delete lesson?'
                             content={<p>It will delete data about this lesson from data base.</p>}
                             action = {this.confirmAction}
+                            mode = {CONFIRM_MODE}
                         />
                 <h1 className="lesson-page-header">English lessons with my pupils</h1>
                 {/* <a href=""><img  className="action-button " src={addLink}/></a> */}

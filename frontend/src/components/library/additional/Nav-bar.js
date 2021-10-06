@@ -3,7 +3,8 @@ import react from "react";
 import { NavLink, Navbar,NavDropdown,Nav, Container, Form, FormControl, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Image } from "react-bootstrap";
-import profileLink from './profileLink.png'
+// import profileLink from './profileLink.png'
+import profileLink from '../../../constants/Styles/Images/profileLink.png'
 import * as APPMODE from '../../../constants/AppConstants' 
 
 export class AppNavBar extends React.Component{

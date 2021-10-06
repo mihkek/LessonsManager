@@ -74,11 +74,8 @@ export class AccessControlController {
     } 
     @Post("profile")
     async getProfile(@Res() res,@Req() req){
-      console.log("seesonf - " +req.session_id)
-        const session = await this.accessControlService.getSessionBySession_id(req.session_id)
-        console.log(session)
+        const session = await this.accessControlService.getSessionBySession_id(req.body.session_id)
         const user =  await this.accessControlService.getFullUserInfo(session.session.user.id)
-        console.log(user)
         if(!user.found){
           res.status(500)
         }else{
@@ -87,6 +84,13 @@ export class AccessControlController {
           })
         }
 
+    }
+    @Post("saveProfile")
+    async saveProfile(@Res() res,@Req() req){
+        const session = await this.accessControlService.getSessionBySession_id(req.body.session_id)
+        console.log(session)
+        await this.accessControlService.saveNewUserInfo(req.body.userData, session.session.user.id)
+        res.status(200).json()
     }
     @Get("someTest/:p")
     async testHash(@Param() p){

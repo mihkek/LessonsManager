@@ -459,6 +459,8 @@
  }
  .modalWindow-content {
    padding: 1rem;
+   font-family: 'Playfair Display';
+   font-size: 20px;
  }
  
  .modalWindow-title {
