@@ -6,7 +6,7 @@ export class LessonsManagerService {
     async getAllLessons(params){
         var message = ''
         var state = true 
-        var lessons = await Lesson.find()
+        var lessons = await Lesson.find(params)
         return({
             lessons:lessons,
             state:state,

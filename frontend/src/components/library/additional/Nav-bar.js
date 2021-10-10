@@ -64,7 +64,6 @@ export class AppNavBar extends React.Component{
                                 </Nav>
                             </Navbar.Collapse>
                            
-                          
                                 {this.props.mode != APPMODE.ModeGuest &&      
                                     <React.Fragment>                   
                                         <NavDropdown title="User" className="left-nav">

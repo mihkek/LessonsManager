@@ -1,6 +1,8 @@
 import { userInfo } from "os";
 import { BaseEntity, Column, Double, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { SessinsStore } from "./SessinsStore";
+import { Teacher } from "./Teacher";
+import { Pupil } from "./Pupil";
 
 @Entity("users")
 export class User extends BaseEntity
@@ -20,10 +22,6 @@ export class User extends BaseEntity
     @Column()
     mode : number
 
-    @OneToMany( type => SessinsStore , session => session.user)
-    sessions: SessinsStore[];
-
-
     @Column({default:null})
     fullname: string
 
@@ -39,16 +37,16 @@ export class User extends BaseEntity
     @Column({default:null})
     addres:string
 
+    @OneToMany( type => SessinsStore , session => session.user)
+    sessions: SessinsStore[];
+
+    @OneToMany( type => Teacher , teacher => teacher.user)
+    teachers: Teacher[];
+
+    @OneToMany( type => Pupil , pupil => pupil.user)
+    pupils: Pupil[];
     
     constructor(){
       super()
     }
-    // constructor(login: string, password: string, mode:number,  id?: number) {
-    //     super();
-    //     this.id = id;
-    //     this.login = login;
-    //     this.password = password;
-    //     this.mode = mode;
-    //   }
-
 }

@@ -8,10 +8,6 @@ import axios from 'axios'
 import {LessonView} from './pages/elements/LessonView' 
 import { NotFound } from './library/additional/NotFound404';
 import { Footer } from './library/base/Footer';
-import { BaseWidget } from './pages/widgets/BaseWidget';
-
-import { ModalFooter } from 'react-bootstrap';
-import {ConfirmModal} from './library/additional/ConfirmWindow'
 import {
     Route,
     Switch,

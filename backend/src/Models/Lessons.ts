@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Double, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Double, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Study } from "./Study";
 
 @Entity("lessons")
 export class Lesson extends BaseEntity
@@ -12,6 +13,9 @@ export class Lesson extends BaseEntity
     @Column()
     task : string
 
+    @ManyToOne(type => Study, study => study.lessons)
+    study: Study;
+    
     constructor() {
         super();
       }

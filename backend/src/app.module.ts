@@ -18,6 +18,10 @@ import { LessonsManagerService } from './lessons-manager/lessons-manager.service
 import { ApiRedirectMiddleware } from './middlewares/api_redirect';
 import { PupilSecureMiddleware } from './middlewares/pupil_secure';
 import { TeacherSecureMiddleware } from './middlewares/teacher_secure';
+import { AccessJwtControlModule } from './access-jwt-control/access-jwt-control.module';
+import {Teacher} from './Models/Teacher'
+import {Pupil} from './Models/Pupil'
+import {Study} from './Models/Study'
 
 @Module({
   imports: [
@@ -30,11 +34,12 @@ import { TeacherSecureMiddleware } from './middlewares/teacher_secure';
       database: 'postgres',
       logging: true,
       synchronize: true,
-      entities: [User, Lesson, SessinsStore],
+      entities: [User, Lesson, SessinsStore, Teacher, Pupil, Study],
     }),
     TeacherModule,
     PupilModule,
-    AccessControlModule
+    AccessControlModule,
+    AccessJwtControlModule,
   ],
   controllers: [AppController,TeacherController,PupilController, AccessControlController],
   providers: [AppService,TeacherService,PupilService, AccessControlService, LessonsManagerService],

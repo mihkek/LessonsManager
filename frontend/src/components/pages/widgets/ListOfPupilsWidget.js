@@ -9,6 +9,7 @@ export function ListOfPupilsWidget(props){
     /*
       Props:
       1. ApiUrl - api-url for getting data
+      2. Title
     */
       const [componentState, setComponentState] = useState(undefined);
       useEffect(()=>{
@@ -21,7 +22,6 @@ export function ListOfPupilsWidget(props){
             secure: true,
             headers: {},
             params: {
-                //teacherId:props.teacherId
                 "session_id" : session_id
             }
         })

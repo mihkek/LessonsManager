@@ -9,6 +9,7 @@ export class TeacherController {
     @Get("lessons")
     async getLessons(@Req() req, @Res() res)
     {
+        req.params.id
         var data = await this.lessonsManagerService.getAllLessons(undefined)
         if(!data.state){
             res.status(200).json({
